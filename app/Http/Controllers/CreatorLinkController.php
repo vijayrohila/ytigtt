@@ -64,7 +64,9 @@ class CreatorLinkController extends Controller
                     ->where('id', $winner->id)
                     ->increment('clicks');
 
-                $clicks = (int) $winner->clicks + 1;
+                $clicks = (int) DB::table('creator_link_winners')
+                    ->where('id', $winner->id)
+                    ->value('clicks');
             }
         }
 
