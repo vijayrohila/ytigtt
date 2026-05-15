@@ -10,8 +10,6 @@ use Illuminate\Validation\Rule;
 
 class CreatorLinkController extends Controller
 {
-    private const MIN_VIEW_SECONDS = 10;
-    private const UNLOCK_TTL_SECONDS = 600;
     private const PLATFORM_LABELS = [
         'yt' => 'YouTube',
         'ig' => 'Instagram',
@@ -33,6 +31,8 @@ class CreatorLinkController extends Controller
         $platform = $validated['platform'];
         $now = Carbon::now();
         $token = bin2hex(random_bytes(20));
+        $minViewSeconds = $this->minViewSeconds();
+        $unlockTtlSeconds = $this->unlockTtlSeconds();
 
         DB::table('creator_link_unlocks')->updateOrInsert(
             [
@@ -44,8 +44,8 @@ class CreatorLinkController extends Controller
                 'access_token' => $token,
                 'ip_address' => $request->ip(),
                 'clicked_at' => $now,
-                'available_at' => $now->copy()->addSeconds(self::MIN_VIEW_SECONDS),
-                'expires_at' => $now->copy()->addSeconds(self::UNLOCK_TTL_SECONDS),
+                'available_at' => $now->copy()->addSeconds($minViewSeconds),
+                'expires_at' => $now->copy()->addSeconds($unlockTtlSeconds),
                 'used_at' => null,
                 'updated_at' => $now,
                 'created_at' => $now,
@@ -74,8 +74,9 @@ class CreatorLinkController extends Controller
             'success' => true,
             'platform' => $platform,
             'token' => $token,
-            'available_at' => $now->copy()->addSeconds(self::MIN_VIEW_SECONDS)->timestamp,
-            'min_view_seconds' => self::MIN_VIEW_SECONDS,
+            'available_at' => $now->copy()->addSeconds($minViewSeconds)->timestamp,
+            'expires_at' => $now->copy()->addSeconds($unlockTtlSeconds)->timestamp,
+            'min_view_seconds' => $minViewSeconds,
             'clicks' => $clicks,
         ]);
     }
@@ -117,13 +118,21 @@ class CreatorLinkController extends Controller
         if ($now->lt(Carbon::parse($unlock->available_at))) {
             return response()->json([
                 'success' => false,
-                'error' => 'Please wait at least '.self::MIN_VIEW_SECONDS.' seconds before submitting.',
+                'error' => 'Please wait at least '.$this->minViewSeconds().' seconds before submitting.',
             ], 422);
         }
 
         if ($now->gt(Carbon::parse($unlock->expires_at))) {
+            DB::table('creator_link_unlocks')
+                ->where('id', $unlock->id)
+                ->update([
+                    'used_at' => $now,
+                    'updated_at' => $now,
+                ]);
+
             return response()->json([
                 'success' => false,
+                'expired' => true,
                 'error' => 'This submit unlock expired. Click the featured creator again.',
             ], 422);
         }
@@ -184,5 +193,15 @@ class CreatorLinkController extends Controller
     private function platformLabel(string $platform): string
     {
         return self::PLATFORM_LABELS[$platform] ?? 'creator';
+    }
+
+    private function minViewSeconds(): int
+    {
+        return max(1, (int) config('creator_links.min_view_seconds', 10));
+    }
+
+    private function unlockTtlSeconds(): int
+    {
+        return max($this->minViewSeconds(), (int) config('creator_links.unlock_ttl_seconds', 180));
     }
 }

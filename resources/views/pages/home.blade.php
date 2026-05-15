@@ -44,7 +44,7 @@
       <p class="font-semibold">Total Submissions: <span class="text-orange-600">{{ number_format($totalSubmissions ?? 0) }}</span></p>
       <p class="font-semibold">Featured Creators: <span class="text-violet-600">{{ number_format($featuredCreatorCount ?? 0) }}</span></p>
       <p class="font-semibold">Running Date: <span class="text-yellow-600">{{ $runningDate ?? '06-05-2026' }}</span></p>
-      <p class="font-semibold">Serving Since: <span class="text-gray-600">04-05-2026</span></p>
+      <p class="font-semibold">Serving Since: <span class="text-gray-600">{{ $servingSince ?? '04-05-2026' }}</span></p>
     </div>
   </section>
 
@@ -185,16 +185,8 @@
 
 @push('scripts')
 <script>
-  window.addEventListener("pageshow", (event) => {
-    if (event.persisted || performance.getEntriesByType("navigation")[0]?.type === "back_forward") {
-      window.location.reload();
-    }
-  });
-</script>
-
-<script>
   const platforms = ['yt', 'ig', 'tt'];
-  const DEFAULT_WAIT_TIME = 10000;
+  const DEFAULT_WAIT_TIME = {{ (int) ($minViewSeconds ?? 10) }} * 1000;
   const platformLabels = {
     yt: 'YouTube',
     ig: 'Instagram',
@@ -254,11 +246,19 @@
       return false;
     }
 
+    if (isExpired(access)) {
+      return false;
+    }
+
     const requiredWait = Number(access.waitMs || DEFAULT_WAIT_TIME);
     const waitedInBrowser = Date.now() - Number(access.leftAtMs) >= requiredWait;
     const serverReady = Math.floor(Date.now() / 1000) >= Number(access.availableAt);
 
     return waitedInBrowser && serverReady;
+  }
+
+  function isExpired(access) {
+    return Boolean(access?.expiresAt) && Math.floor(Date.now() / 1000) > Number(access.expiresAt);
   }
 
   async function showEarlyReturnMessage(id, access) {
@@ -314,7 +314,9 @@
     try {
       const data = text ? JSON.parse(text) : {};
       if (!response.ok) {
-        throw new Error(data.error || data.message || 'Request failed.');
+        const requestError = new Error(data.error || data.message || 'Request failed.');
+        Object.assign(requestError, data);
+        throw requestError;
       }
 
       return data;
@@ -405,7 +407,8 @@
           leftAtMs,
           token: data.token,
           availableAt: data.available_at,
-          waitMs: (data.min_view_seconds || 10) * 1000,
+          expiresAt: data.expires_at,
+          waitMs: (data.min_view_seconds || {{ (int) ($minViewSeconds ?? 10) }}) * 1000,
         });
         window.location.href = featuredHref;
       } catch (error) {
@@ -420,6 +423,14 @@
     const access = getPlatformAccess(lastClicked);
 
     if (lastClicked && access) {
+      if (isExpired(access)) {
+        clearPlatformAccess(lastClicked);
+        hideFields(lastClicked);
+        localStorage.removeItem('lastClicked');
+        showMessage('Unlock expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
+        return;
+      }
+
       if (canSubmit(access)) {
         showFields(lastClicked);
         localStorage.removeItem('lastClicked');
@@ -447,9 +458,16 @@
       const inputVal = document.getElementById(p + 'Input').value.trim();
       const access = getPlatformAccess(p);
 
+      if (isExpired(access)) {
+        clearPlatformAccess(p);
+        hideFields(p);
+        await showMessage('Unlock expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
+        return;
+      }
+
       if (!access || !access.token || !canSubmit(access)) {
         hideFields(p);
-        await showMessage('Unlock required', 'Click the featured creator first, wait 5 seconds, then submit.', 'warning');
+        await showMessage('Unlock required', 'Click the featured creator first, wait 10 seconds, then submit.', 'warning');
         return;
       }
 
@@ -490,6 +508,11 @@
         document.getElementById(p + 'Input').value = '';
         location.reload();
       } catch (error) {
+        if (error.expired) {
+          clearPlatformAccess(p);
+          hideFields(p);
+        }
+
         await showMessage('Error', error.message || 'An error occurred. Please try again.', 'error');
       }
     });
