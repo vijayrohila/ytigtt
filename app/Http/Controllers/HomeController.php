@@ -19,6 +19,10 @@ class HomeController extends Controller
 
         $this->recordVisit($request, $today->toDateString());
         
+        $latestWinnerDate = DB::table('creator_link_winners')
+            ->whereDate('winner_date', '<=', $today)
+            ->max('winner_date');
+
         return view('pages.home', [
             'liveVisitors' => $this->liveVisitors($request),
             'todayVisitors' => $this->visitorCountForDate($today->toDateString()),
@@ -27,10 +31,12 @@ class HomeController extends Controller
             'totalSubmissions' => DB::table('creator_link_submissions')->count(),
             'featuredCreatorCount' => $this->featuredCreatorCount($today),
             'runningDate' => Carbon::parse(self::RUNNING_DATE)->format('d-m-Y'),
-            'featuredCreators' => DB::table('creator_link_winners')
-                ->whereDate('winner_date', $today)
-                ->get()
-                ->keyBy('platform'),
+            'featuredCreators' => $latestWinnerDate
+                ? DB::table('creator_link_winners')
+                    ->whereDate('winner_date', $latestWinnerDate)
+                    ->get()
+                    ->keyBy('platform')
+                : collect(),
         ]);
     }
 

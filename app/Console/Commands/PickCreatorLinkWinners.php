@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\DB;
 class PickCreatorLinkWinners extends Command
 {
     protected $signature = 'creator-links:pick-winners
-        {--date= : Winner date, defaults to today}
-        {--from-date= : Submission date to pick from, defaults to the day before winner date}
-        {--force : Replace existing winners for the winner date}';
+        {--date= : UTC date to process, defaults to yesterday}
+        {--force : Replace existing winners for the processed date}';
 
     protected $description = 'Pick one YouTube, Instagram, and TikTok submission as daily winners.';
 
@@ -24,30 +23,26 @@ class PickCreatorLinkWinners extends Command
 
     public function handle(): int
     {
-        $winnerDate = $this->option('date')
+        $processDate = $this->option('date')
             ? Carbon::parse($this->option('date'), self::TIMEZONE)->toDateString()
-            : Carbon::today(self::TIMEZONE)->toDateString();
-
-        $submissionDate = $this->option('from-date')
-            ? Carbon::parse($this->option('from-date'), self::TIMEZONE)->toDateString()
-            : Carbon::parse($winnerDate, self::TIMEZONE)->subDay()->toDateString();
+            : Carbon::yesterday(self::TIMEZONE)->toDateString();
 
         $platforms = ['yt', 'ig', 'tt'];
         $picked = 0;
 
         foreach ($platforms as $platform) {
             $existingWinner = DB::table('creator_link_winners')
-                ->where('winner_date', $winnerDate)
+                ->where('winner_date', $processDate)
                 ->where('platform', $platform)
                 ->exists();
 
             if ($existingWinner && ! $this->option('force')) {
-                $this->line("{$platform}: winner already exists for {$winnerDate}; skipping.");
+                $this->line("{$platform}: winner already exists for {$processDate}; skipping.");
                 continue;
             }
 
             $submission = DB::table('creator_link_submissions')
-                ->where('submission_date', $submissionDate)
+                ->where('submission_date', $processDate)
                 ->where('platform', $platform)
                 ->inRandomOrder()
                 ->first();
@@ -55,7 +50,7 @@ class PickCreatorLinkWinners extends Command
             if (! $submission) {
                 $winnerLink = self::FALLBACK_LINKS[$platform];
                 $submissionId = null;
-                $this->warn("{$platform}: no submissions found for {$submissionDate}; using fallback link.");
+                $this->warn("{$platform}: no submissions found for {$processDate}; using fallback link.");
             } else {
                 $winnerLink = $submission->submitted_link;
                 $submissionId = $submission->id;
@@ -63,7 +58,7 @@ class PickCreatorLinkWinners extends Command
 
             DB::table('creator_link_winners')->updateOrInsert(
                 [
-                    'winner_date' => $winnerDate,
+                    'winner_date' => $processDate,
                     'platform' => $platform,
                 ],
                 [
@@ -77,13 +72,16 @@ class PickCreatorLinkWinners extends Command
 
             $picked++;
             if ($submissionId) {
-                $this->info("{$platform}: selected submission #{$submissionId} for {$winnerDate}.");
+                $this->info("{$platform}: selected submission #{$submissionId} for {$processDate}.");
             } else {
-                $this->info("{$platform}: selected fallback link for {$winnerDate}.");
+                $this->info("{$platform}: selected fallback link for {$processDate}.");
             }
         }
 
-        $this->info("Picked {$picked} winner(s) from {$submissionDate} for {$winnerDate}.");
+        DB::table('creator_link_submissions')->delete();
+
+        $this->info("Picked {$picked} winner(s) for {$processDate}.");
+        $this->info('Deleted all rows from creator_link_submissions.');
 
         return self::SUCCESS;
     }
