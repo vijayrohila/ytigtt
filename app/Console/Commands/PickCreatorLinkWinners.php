@@ -20,16 +20,17 @@ class PickCreatorLinkWinners extends Command
         'ig' => 'https://www.instagram.com/p/Bh8psJYH1lq',
         'tt' => 'https://tiktok.com',
     ];
+    private const TIMEZONE = 'UTC';
 
     public function handle(): int
     {
         $winnerDate = $this->option('date')
-            ? Carbon::parse($this->option('date'))->toDateString()
-            : Carbon::today()->toDateString();
+            ? Carbon::parse($this->option('date'), self::TIMEZONE)->toDateString()
+            : Carbon::today(self::TIMEZONE)->toDateString();
 
         $submissionDate = $this->option('from-date')
-            ? Carbon::parse($this->option('from-date'))->toDateString()
-            : Carbon::parse($winnerDate)->subDay()->toDateString();
+            ? Carbon::parse($this->option('from-date'), self::TIMEZONE)->toDateString()
+            : Carbon::parse($winnerDate, self::TIMEZONE)->subDay()->toDateString();
 
         $platforms = ['yt', 'ig', 'tt'];
         $picked = 0;
@@ -69,8 +70,8 @@ class PickCreatorLinkWinners extends Command
                     'submission_id' => $submissionId,
                     'winner_link' => $winnerLink,
                     'clicks' => 0,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => now(self::TIMEZONE),
+                    'updated_at' => now(self::TIMEZONE),
                 ],
             );
 
