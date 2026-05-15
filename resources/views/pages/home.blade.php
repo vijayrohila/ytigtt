@@ -221,13 +221,12 @@
     localStorage.removeItem(id + 'Unlocked');
   }
 
-  function updateClicks(id, serverClicks = null) {
-    const key = id + 'Clicks';
-    const current = serverClicks ?? (parseInt(localStorage.getItem(key) || '0', 10) + 1);
-    if (serverClicks === null) {
-      localStorage.setItem(key, current);
+  function updateClicks(id, serverClicks) {
+    if (serverClicks === null || typeof serverClicks === 'undefined') {
+      return;
     }
-    document.getElementById(id + 'Clicks').textContent = 'Clicks - ' + current;
+
+    document.getElementById(id + 'Clicks').textContent = 'Clicks - ' + serverClicks;
   }
 
   function showFields(id) {
@@ -351,8 +350,7 @@
   platforms.forEach(p => {
     const clicksElement = document.getElementById(p + 'Clicks');
     const initialClicks = parseInt(clicksElement.dataset.initialClicks || '0', 10);
-    const count = initialClicks || parseInt(localStorage.getItem(p + 'Clicks') || '0', 10);
-    document.getElementById(p + 'Clicks').textContent = 'Clicks - ' + count;
+    clicksElement.textContent = 'Clicks - ' + initialClicks;
 
     if (localStorage.getItem(p + 'Unlocked') === 'true' && canSubmit(getPlatformAccess(p))) {
       showFields(p);
@@ -368,7 +366,6 @@
       const featuredHref = featuredButton.href;
       const winnerId = featuredButton.dataset.winnerId || '';
 
-      updateClicks(p);
       hideFields(p);
 
       const leftAtMs = Date.now();
