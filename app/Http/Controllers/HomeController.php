@@ -10,12 +10,12 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     private const LIVE_VISITOR_WINDOW_MINUTES = 5;
-    private const RUNNING_DATE = '2026-05-06';
+    private const TIMEZONE = 'UTC';
 
     public function __invoke(Request $request): View
     {
-        $today = today();
-        $yesterday = today()->subDay();
+        $today = Carbon::today(self::TIMEZONE);
+        $yesterday = $today->copy()->subDay();
 
         $this->recordVisit($request, $today->toDateString());
         
@@ -29,8 +29,10 @@ class HomeController extends Controller
             'yesterdayVisitors' => $this->visitorCountForDate($yesterday->toDateString()),
             'totalVisitors' => DB::table('visitor_logs')->count(),
             'totalSubmissions' => DB::table('creator_link_submissions')->count(),
-            'featuredCreatorCount' => $this->featuredCreatorCount($today),
-            'runningDate' => Carbon::parse(self::RUNNING_DATE)->format('d-m-Y'),
+            'featuredCreatorCount' => $this->featuredCreatorCount($today, $this->servingSinceDate()),
+            'runningDate' => $today->format('d-m-Y'),
+            'servingSince' => $this->servingSinceDate()->format('d-m-Y'),
+            'minViewSeconds' => max(1, (int) config('creator_links.min_view_seconds', 10)),
             'featuredCreators' => $latestWinnerDate
                 ? DB::table('creator_link_winners')
                     ->whereDate('winner_date', $latestWinnerDate)
@@ -50,15 +52,15 @@ class HomeController extends Controller
             [
                 'ip_address' => $request->ip(),
                 'user_agent_hash' => hash('sha256', $request->userAgent() ?? ''),
-                'updated_at' => now(),
-                'created_at' => now(),
+                'updated_at' => now(self::TIMEZONE),
+                'created_at' => now(self::TIMEZONE),
             ],
         );
     }
 
     private function liveVisitors(Request $request): int
     {
-        $activeSince = now()->subMinutes(self::LIVE_VISITOR_WINDOW_MINUTES)->timestamp;
+        $activeSince = now(self::TIMEZONE)->subMinutes(self::LIVE_VISITOR_WINDOW_MINUTES)->timestamp;
 
         $liveVisitors = DB::table('sessions')
             ->where('last_activity', '>=', $activeSince)
@@ -79,14 +81,18 @@ class HomeController extends Controller
             ->count();
     }
 
-    private function featuredCreatorCount(Carbon $today): int
+    private function featuredCreatorCount(Carbon $today, Carbon $servingSince): int
     {
-        $runningDate = Carbon::parse(self::RUNNING_DATE)->startOfDay();
-
-        if ($today->lt($runningDate)) {
+        if ($today->lt($servingSince)) {
             return 0;
         }
 
-        return ($runningDate->diffInDays($today) + 1) * 3;
+        return ($servingSince->diffInDays($today) + 1) * 3;
+    }
+
+    private function servingSinceDate(): Carbon
+    {
+        return Carbon::parse(config('creator_links.serving_since', '2026-05-04'), self::TIMEZONE)
+            ->startOfDay();
     }
 }
