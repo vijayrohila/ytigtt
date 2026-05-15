@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -9,6 +10,7 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     private const LIVE_VISITOR_WINDOW_MINUTES = 5;
+    private const RUNNING_DATE = '2026-05-06';
 
     public function __invoke(Request $request): View
     {
@@ -16,13 +18,15 @@ class HomeController extends Controller
         $yesterday = today()->subDay();
 
         $this->recordVisit($request, $today->toDateString());
-
+        
         return view('pages.home', [
             'liveVisitors' => $this->liveVisitors($request),
             'todayVisitors' => $this->visitorCountForDate($today->toDateString()),
             'yesterdayVisitors' => $this->visitorCountForDate($yesterday->toDateString()),
             'totalVisitors' => DB::table('visitor_logs')->count(),
             'totalSubmissions' => DB::table('creator_link_submissions')->count(),
+            'featuredCreatorCount' => $this->featuredCreatorCount($today),
+            'runningDate' => Carbon::parse(self::RUNNING_DATE)->format('d-m-Y'),
             'featuredCreators' => DB::table('creator_link_winners')
                 ->whereDate('winner_date', $today)
                 ->get()
@@ -67,5 +71,16 @@ class HomeController extends Controller
         return DB::table('visitor_logs')
             ->whereDate('visited_on', $date)
             ->count();
+    }
+
+    private function featuredCreatorCount(Carbon $today): int
+    {
+        $runningDate = Carbon::parse(self::RUNNING_DATE)->startOfDay();
+
+        if ($today->lt($runningDate)) {
+            return 0;
+        }
+
+        return ($runningDate->diffInDays($today) + 1) * 3;
     }
 }
