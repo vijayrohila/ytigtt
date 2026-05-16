@@ -1,0 +1,26 @@
+            * Codes related to promotional contents inside bottom of 3 network boxes
+            
+            
+            <p class="text-center text-xs text-gray-500 mt-6">
+              To Discover More YouTube Creators -
+              <a href="https://shortroads.com" target="_blank" rel="noopener noreferrer"
+                 class="text-red-500 font-medium no-underline hover:text-red-600">
+                 shortroads.com
+              </a>
+            </p>
+            
+            <p class="text-center text-xs text-gray-500 mt-6">
+              To Discover Creators from 20+ Social Networks -
+              <a href="https://secminhr.com" target="_blank" rel="noopener noreferrer"
+                 class="text-pink-500 font-medium no-underline hover:text-pink-600">
+                 secminhr.com
+              </a>
+            </p>
+            
+            <p class="text-center text-xs text-gray-500 mt-6">
+              To Discover Creators from 20+ Social Networks -
+              <a href="https://secminhr.com" target="_blank" rel="noopener noreferrer"
+                 class="text-[#FE2C55] font-medium no-underline hover:text-pink-600">
+                 secminhr.com
+              </a>
+            </p>

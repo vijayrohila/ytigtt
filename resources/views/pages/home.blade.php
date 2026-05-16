@@ -69,7 +69,11 @@
 
       <div class="bg-white border border-red-500 rounded-2xl shadow-lg p-6 flex-1 max-w-sm mx-auto flex flex-col justify-between">
         <h4 class="text-center text-2xl font-semibold text-red-600 mb-3">YouTube - YT</h4>
-
+        
+        <p class="text-center text-xs text-gray-600 mb-2">
+          YouTube Active Creators - <span class="font-semibold text-red-500">69M+</span>
+        </p>
+        
         <p class="text-center text-xs text-gray-600 mb-6">
           YouTube Monthly Active Users - <span class="font-semibold text-red-500">2.6B+</span>
         </p>
@@ -100,10 +104,13 @@
         <h4 class="text-center text-2xl font-semibold text-pink-600 mb-3">
           Instagram - IG
         </h4>
+        
+        <p class="text-center text-xs text-gray-600 mb-2">
+          Instagram Active Creators - <span class="font-semibold text-pink-500">5.8M+</span>
+        </p>
 
         <p class="text-center text-xs text-gray-600 mb-6">
-          Instagram Monthly Active Users -
-          <span class="font-semibold text-pink-500">2B+</span>
+          Instagram Monthly Active Users - <span class="font-semibold text-pink-500">2B+</span>
         </p>
 
         <div class="flex gap-3 mb-6">
@@ -136,10 +143,13 @@
         <h4 class="text-center text-2xl font-semibold text-[#FE2C55] mb-3">
           TikTok - TT
         </h4>
-
+        
+        <p class="text-center text-xs text-gray-600 mb-2">
+          TikTok Active Creators - <span class="font-semibold text-[#FE2C55]">15.8M+</span>
+        </p>
+        
         <p class="text-center text-xs text-gray-600 mb-6">
-          TikTok Monthly Active Users -
-          <span class="font-semibold text-[#FE2C55]">1.9B+</span>
+          TikTok Monthly Active Users - <span class="font-semibold text-[#FE2C55]">1.9B+</span>
         </p>
 
         <div class="flex gap-3 mb-6">
@@ -427,7 +437,7 @@
         clearPlatformAccess(lastClicked);
         hideFields(lastClicked);
         localStorage.removeItem('lastClicked');
-        showMessage('Unlock expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
+        showMessage('Session expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
         return;
       }
 
@@ -461,7 +471,7 @@
       if (isExpired(access)) {
         clearPlatformAccess(p);
         hideFields(p);
-        await showMessage('Unlock expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
+        await showMessage('Session expired', 'This submit unlock expired. Click the featured creator again.', 'warning');
         return;
       }
 

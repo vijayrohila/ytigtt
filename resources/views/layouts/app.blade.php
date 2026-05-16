@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>@yield('title', 'YT IG TT - Creator Discovery Platform')</title>
+  <title>@yield('title', 'YT IG TT - Creator Discovery Platform!')</title>
   <meta name="description" content="@yield('description', 'Explore featured creators, submit your content, and participate in the YT IG TT daily discovery experience for YouTube, Instagram, and TikTok creators worldwide.')">
 
   <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
