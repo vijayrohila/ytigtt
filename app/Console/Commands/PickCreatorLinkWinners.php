@@ -30,6 +30,15 @@ class PickCreatorLinkWinners extends Command
         $platforms = ['yt', 'ig', 'tt'];
         $picked = 0;
 
+        $existingWinnersCount = DB::table('creator_link_winners')
+            ->where('winner_date', $processDate)
+            ->count();
+
+        if ($existingWinnersCount > 0 && ! $this->option('force')) {
+            $this->line("Winners already exist for {$processDate}; skipping command.");
+            return self::SUCCESS;
+        }
+
         foreach ($platforms as $platform) {
             $existingWinner = DB::table('creator_link_winners')
                 ->where('winner_date', $processDate)

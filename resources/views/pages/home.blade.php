@@ -202,8 +202,8 @@
     ig: 'Instagram',
     tt: 'TikTok',
   };
-  const submitUrl = '{{ route("submit.link") }}';
-  const clickUrl = '{{ route("creator.click") }}';
+  const submitUrl = '{{ route("submit.link", [], false) }}';
+  const clickUrl = '{{ route("creator.click", [], false) }}';
   const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
   function getPlatformAccess(id) {
@@ -325,6 +325,7 @@
       const data = text ? JSON.parse(text) : {};
       if (!response.ok) {
         const requestError = new Error(data.error || data.message || 'Request failed.');
+        requestError.csrfExpired = response.status === 419;
         Object.assign(requestError, data);
         throw requestError;
       }
@@ -423,6 +424,12 @@
         window.location.href = featuredHref;
       } catch (error) {
         clearPlatformAccess(p);
+        if (error.csrfExpired) {
+          await showMessage('Session expired', 'Please refresh the page and try again.', 'warning');
+          window.location.reload();
+          return;
+        }
+
         await showMessage('Could not unlock', error.message || 'Could not unlock submit box. Please try again.', 'error');
       }
     });
@@ -521,6 +528,12 @@
         if (error.expired) {
           clearPlatformAccess(p);
           hideFields(p);
+        }
+
+        if (error.csrfExpired) {
+          await showMessage('Session expired', 'Please refresh the page and try again.', 'warning');
+          window.location.reload();
+          return;
         }
 
         await showMessage('Error', error.message || 'An error occurred. Please try again.', 'error');
