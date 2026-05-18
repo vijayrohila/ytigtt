@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\SettingStore;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class HomeController extends Controller
             'todayVisitors' => $this->visitorCountForDate($today->toDateString()),
             'yesterdayVisitors' => $this->visitorCountForDate($yesterday->toDateString()),
             'totalVisitors' => DB::table('visitor_logs')->count(),
-            'totalSubmissions' => DB::table('creator_link_submissions')->count(),
+            'totalSubmissions' => SettingStore::integer('total_submissions'),
             'featuredCreatorCount' => $this->featuredCreatorCount($today, $this->servingSinceDate()),
             'runningDate' => $today->format('d-m-Y'),
             'servingSince' => $this->servingSinceDate()->format('d-m-Y'),

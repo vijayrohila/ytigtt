@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\SettingStore;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -156,6 +157,8 @@ class CreatorLinkController extends Controller
                     'used_at' => $now,
                     'updated_at' => $now,
                 ]);
+
+            SettingStore::increment('total_submissions');
         });
 
         return response()->json([

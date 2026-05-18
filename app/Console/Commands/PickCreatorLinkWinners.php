@@ -39,17 +39,11 @@ class PickCreatorLinkWinners extends Command
             return self::SUCCESS;
         }
 
+        DB::table('creator_link_winners')->delete();
+
+        $this->line("Deleted existing winners for {$processDate} before saving new winners.");
+
         foreach ($platforms as $platform) {
-            $existingWinner = DB::table('creator_link_winners')
-                ->where('winner_date', $processDate)
-                ->where('platform', $platform)
-                ->exists();
-
-            if ($existingWinner && ! $this->option('force')) {
-                $this->line("{$platform}: winner already exists for {$processDate}; skipping.");
-                continue;
-            }
-
             $submission = DB::table('creator_link_submissions')
                 ->where('submission_date', $processDate)
                 ->where('platform', $platform)
@@ -65,19 +59,15 @@ class PickCreatorLinkWinners extends Command
                 $submissionId = $submission->id;
             }
 
-            DB::table('creator_link_winners')->updateOrInsert(
-                [
-                    'winner_date' => $processDate,
-                    'platform' => $platform,
-                ],
-                [
-                    'submission_id' => $submissionId,
-                    'winner_link' => $winnerLink,
-                    'clicks' => 0,
-                    'created_at' => now(self::TIMEZONE),
-                    'updated_at' => now(self::TIMEZONE),
-                ],
-            );
+            DB::table('creator_link_winners')->insert([
+                'winner_date' => $processDate,
+                'platform' => $platform,
+                'submission_id' => $submissionId,
+                'winner_link' => $winnerLink,
+                'clicks' => 0,
+                'created_at' => now(self::TIMEZONE),
+                'updated_at' => now(self::TIMEZONE),
+            ]);
 
             $picked++;
             if ($submissionId) {
