@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CreatorLinkSubmission;
+use App\Models\CreatorLinkUnlock;
+use App\Models\CreatorLinkWinner;
 use App\Support\SettingStore;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -35,7 +38,7 @@ class CreatorLinkController extends Controller
         $minViewSeconds = $this->minViewSeconds();
         $unlockTtlSeconds = $this->unlockTtlSeconds();
 
-        DB::table('creator_link_unlocks')->updateOrInsert(
+        CreatorLinkUnlock::query()->updateOrCreate(
             [
                 'unlock_date' => Carbon::today()->toDateString(),
                 'session_id' => $request->session()->getId(),
@@ -55,19 +58,16 @@ class CreatorLinkController extends Controller
 
         $clicks = null;
         if ($request->filled('winner_id')) {
-            $winner = DB::table('creator_link_winners')
-                ->where('id', (int) $request->input('winner_id'))
+            $winner = CreatorLinkWinner::query()
+                ->whereKey((int) $request->input('winner_id'))
                 ->where('platform', $platform)
                 ->first();
 
             if ($winner) {
-                DB::table('creator_link_winners')
-                    ->where('id', $winner->id)
-                    ->increment('clicks');
+                $winner->increment('clicks');
+                $winner->refresh();
 
-                $clicks = (int) DB::table('creator_link_winners')
-                    ->where('id', $winner->id)
-                    ->value('clicks');
+                $clicks = (int) $winner->clicks;
             }
         }
 
@@ -100,7 +100,7 @@ class CreatorLinkController extends Controller
             ], 422);
         }
 
-        $unlock = DB::table('creator_link_unlocks')
+        $unlock = CreatorLinkUnlock::query()
             ->where('unlock_date', Carbon::today()->toDateString())
             ->where('session_id', $request->session()->getId())
             ->where('platform', $platform)
@@ -116,20 +116,15 @@ class CreatorLinkController extends Controller
         }
 
         $now = Carbon::now();
-        if ($now->lt(Carbon::parse($unlock->available_at))) {
+        if ($now->lt($unlock->available_at)) {
             return response()->json([
                 'success' => false,
                 'error' => 'Please wait at least '.$this->minViewSeconds().' seconds before submitting.',
             ], 422);
         }
 
-        if ($now->gt(Carbon::parse($unlock->expires_at))) {
-            DB::table('creator_link_unlocks')
-                ->where('id', $unlock->id)
-                ->update([
-                    'used_at' => $now,
-                    'updated_at' => $now,
-                ]);
+        if ($now->gt($unlock->expires_at)) {
+            $unlock->update(['used_at' => $now]);
 
             return response()->json([
                 'success' => false,
@@ -139,7 +134,7 @@ class CreatorLinkController extends Controller
         }
 
         DB::transaction(function () use ($request, $platform, $link, $validated, $unlock, $now): void {
-            DB::table('creator_link_submissions')->insert([
+            CreatorLinkSubmission::query()->create([
                 'submission_date' => Carbon::today()->toDateString(),
                 'platform' => $platform,
                 'submitted_link' => $link,
@@ -147,16 +142,9 @@ class CreatorLinkController extends Controller
                 'session_id' => $request->session()->getId(),
                 'ip_address' => $request->ip(),
                 'submitted_at' => $now,
-                'created_at' => $now,
-                'updated_at' => $now,
             ]);
 
-            DB::table('creator_link_unlocks')
-                ->where('id', $unlock->id)
-                ->update([
-                    'used_at' => $now,
-                    'updated_at' => $now,
-                ]);
+            $unlock->update(['used_at' => $now]);
 
             SettingStore::increment('total_submissions');
         });

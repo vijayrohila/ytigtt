@@ -2,13 +2,14 @@
 
 namespace App\Support;
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 
 class SettingStore
 {
     public static function integer(string $key, int $default = 0): int
     {
-        $value = DB::table('settings')
+        $value = Setting::query()
             ->where('key', $key)
             ->value('value');
 
@@ -18,20 +19,16 @@ class SettingStore
     public static function increment(string $key, int $amount = 1): int
     {
         return DB::transaction(function () use ($key, $amount): int {
-            $setting = DB::table('settings')
+            $setting = Setting::query()
                 ->where('key', $key)
                 ->lockForUpdate()
                 ->first();
 
             $value = ((int) ($setting->value ?? 0)) + max(1, $amount);
 
-            DB::table('settings')->updateOrInsert(
+            Setting::query()->updateOrCreate(
                 ['key' => $key],
-                [
-                    'value' => (string) $value,
-                    'updated_at' => now(),
-                    'created_at' => $setting->created_at ?? now(),
-                ],
+                ['value' => (string) $value],
             );
 
             return $value;

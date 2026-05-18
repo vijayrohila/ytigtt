@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CreatorLinkWinner;
+use App\Models\Session;
+use App\Models\VisitorLog;
 use App\Support\SettingStore;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -20,7 +22,7 @@ class HomeController extends Controller
 
         $this->recordVisit($request, $today->toDateString());
         
-        $latestWinnerDate = DB::table('creator_link_winners')
+        $latestWinnerDate = CreatorLinkWinner::query()
             ->whereDate('winner_date', '<=', $today)
             ->max('winner_date');
 
@@ -28,14 +30,14 @@ class HomeController extends Controller
             'liveVisitors' => $this->liveVisitors($request),
             'todayVisitors' => $this->visitorCountForDate($today->toDateString()),
             'yesterdayVisitors' => $this->visitorCountForDate($yesterday->toDateString()),
-            'totalVisitors' => DB::table('visitor_logs')->count(),
+            'totalVisitors' => VisitorLog::query()->count(),
             'totalSubmissions' => SettingStore::integer('total_submissions'),
             'featuredCreatorCount' => $this->featuredCreatorCount($today, $this->servingSinceDate()),
             'runningDate' => $today->format('d-m-Y'),
             'servingSince' => $this->servingSinceDate()->format('d-m-Y'),
             'minViewSeconds' => max(1, (int) config('creator_links.min_view_seconds', 10)),
             'featuredCreators' => $latestWinnerDate
-                ? DB::table('creator_link_winners')
+                ? CreatorLinkWinner::query()
                     ->whereDate('winner_date', $latestWinnerDate)
                     ->get()
                     ->keyBy('platform')
@@ -45,7 +47,7 @@ class HomeController extends Controller
 
     private function recordVisit(Request $request, string $visitedOn): void
     {
-        DB::table('visitor_logs')->updateOrInsert(
+        VisitorLog::query()->updateOrCreate(
             [
                 'session_id' => $request->session()->getId(),
                 'visited_on' => $visitedOn,
@@ -53,8 +55,6 @@ class HomeController extends Controller
             [
                 'ip_address' => $request->ip(),
                 'user_agent_hash' => hash('sha256', $request->userAgent() ?? ''),
-                'updated_at' => now(self::TIMEZONE),
-                'created_at' => now(self::TIMEZONE),
             ],
         );
     }
@@ -63,11 +63,11 @@ class HomeController extends Controller
     {
         $activeSince = now(self::TIMEZONE)->subMinutes(self::LIVE_VISITOR_WINDOW_MINUTES)->timestamp;
 
-        $liveVisitors = DB::table('sessions')
+        $liveVisitors = Session::query()
             ->where('last_activity', '>=', $activeSince)
             ->count();
 
-        $currentSessionTracked = DB::table('sessions')
+        $currentSessionTracked = Session::query()
             ->where('id', $request->session()->getId())
             ->where('last_activity', '>=', $activeSince)
             ->exists();
@@ -77,7 +77,7 @@ class HomeController extends Controller
 
     private function visitorCountForDate(string $date): int
     {
-        return DB::table('visitor_logs')
+        return VisitorLog::query()
             ->whereDate('visited_on', $date)
             ->count();
     }

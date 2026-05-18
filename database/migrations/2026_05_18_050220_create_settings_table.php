@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\CreatorLinkSubmission;
+use App\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,13 +20,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('settings')->insert([
+        Setting::query()->create([
             'key' => 'total_submissions',
             'value' => Schema::hasTable('creator_link_submissions')
-                ? (string) DB::table('creator_link_submissions')->count()
+                ? (string) CreatorLinkSubmission::query()->count()
                 : '0',
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
     }
 

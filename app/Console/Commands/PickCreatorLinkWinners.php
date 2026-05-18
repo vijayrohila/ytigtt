@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\CreatorLinkSubmission;
+use App\Models\CreatorLinkWinner;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class PickCreatorLinkWinners extends Command
 {
@@ -30,7 +31,7 @@ class PickCreatorLinkWinners extends Command
         $platforms = ['yt', 'ig', 'tt'];
         $picked = 0;
 
-        $existingWinnersCount = DB::table('creator_link_winners')
+        $existingWinnersCount = CreatorLinkWinner::query()
             ->where('winner_date', $processDate)
             ->count();
 
@@ -39,12 +40,14 @@ class PickCreatorLinkWinners extends Command
             return self::SUCCESS;
         }
 
-        DB::table('creator_link_winners')->delete();
+        CreatorLinkWinner::query()
+            ->where('winner_date', $processDate)
+            ->delete();
 
         $this->line("Deleted existing winners for {$processDate} before saving new winners.");
 
         foreach ($platforms as $platform) {
-            $submission = DB::table('creator_link_submissions')
+            $submission = CreatorLinkSubmission::query()
                 ->where('submission_date', $processDate)
                 ->where('platform', $platform)
                 ->inRandomOrder()
@@ -59,14 +62,12 @@ class PickCreatorLinkWinners extends Command
                 $submissionId = $submission->id;
             }
 
-            DB::table('creator_link_winners')->insert([
+            CreatorLinkWinner::query()->create([
                 'winner_date' => $processDate,
                 'platform' => $platform,
                 'submission_id' => $submissionId,
                 'winner_link' => $winnerLink,
                 'clicks' => 0,
-                'created_at' => now(self::TIMEZONE),
-                'updated_at' => now(self::TIMEZONE),
             ]);
 
             $picked++;
@@ -77,7 +78,7 @@ class PickCreatorLinkWinners extends Command
             }
         }
 
-        DB::table('creator_link_submissions')->delete();
+        CreatorLinkSubmission::query()->delete();
 
         $this->info("Picked {$picked} winner(s) for {$processDate}.");
         $this->info('Deleted all rows from creator_link_submissions.');
