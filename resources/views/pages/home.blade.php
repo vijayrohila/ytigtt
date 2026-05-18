@@ -189,6 +189,36 @@
       </a>
     </div>
   </section>
+  
+  <section class="text-white text-center">
+      <div class="max-w-3xl mx-auto space-y-4">
+    
+        <p class="text-lg md:text-xl leading-relaxed">
+          <a href="https://ytigtt.com/" target="_blank"
+            class="text-2xl font-semibold bg-gradient-to-br from-[#134e5e] to-[#71b280] bg-clip-text text-transparent">
+            Sponsorship : 
+          </a>
+          tacepook.com is a powerful all-in-one platform with 150+ AI tools designed to boost productivity, creativity, and everyday workflows. Fast, simple, and built to get things done without complexity.
+        </p>
+    
+        <p class="font-semibold">
+          * 150+ Free AI Tools *
+        </p>
+    
+        <p>
+          Hope you’ll "USE" them.
+        </p>
+    
+        <!-- Button -->
+        <div class="pt-4">
+          <a href="https://tacepook.com/" target="_blank"
+            class="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-[#134e5e] to-[#71b280] text-white font-semibold shadow-md hover:opacity-90 transition">
+            Visit tacepook.com
+          </a>
+        </div>
+    
+      </div>
+  </section>
 
 </main>
 @endsection
