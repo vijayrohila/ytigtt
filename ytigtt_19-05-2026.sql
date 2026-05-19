@@ -1,0 +1,599 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 19, 2026 at 05:48 AM
+-- Server version: 11.8.6-MariaDB-log
+-- PHP Version: 7.2.34
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `u385330174_ytigtt`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache`
+--
+
+CREATE TABLE `cache` (
+  `key` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache_locks`
+--
+
+CREATE TABLE `cache_locks` (
+  `key` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `expiration` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `creator_link_submissions`
+--
+
+CREATE TABLE `creator_link_submissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `submission_date` date NOT NULL,
+  `platform` varchar(20) NOT NULL,
+  `submitted_link` text NOT NULL,
+  `access_token` varchar(64) DEFAULT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `submitted_at` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `creator_link_unlocks`
+--
+
+CREATE TABLE `creator_link_unlocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `unlock_date` date NOT NULL,
+  `platform` varchar(20) NOT NULL,
+  `access_token` varchar(64) NOT NULL,
+  `session_id` varchar(255) DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `clicked_at` datetime NOT NULL,
+  `available_at` datetime NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `used_at` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `creator_link_unlocks`
+--
+
+INSERT INTO `creator_link_unlocks` (`id`, `unlock_date`, `platform`, `access_token`, `session_id`, `ip_address`, `clicked_at`, `available_at`, `expires_at`, `used_at`, `created_at`, `updated_at`) VALUES
+(1, '2026-05-14', 'ig', '54a538653f296cdedc3f2d840a2efcb67275b2b5', 'dGsCZXI3XQ0aNA1S7oZkOfLziddJzgDtD0NdFN5K', '44.212.244.90', '2026-05-14 15:36:52', '2026-05-14 15:37:02', '2026-05-14 15:46:52', NULL, '2026-05-14 15:36:52', '2026-05-14 15:36:52'),
+(2, '2026-05-15', 'yt', 'd850b773194597f5766cbe4d8b341733ec9f09ca', 'W3O2a5gI7sFGZ71Wj5CskNu0shJXSiBu3ZOmdXcY', '2401:4900:891c:8789:14d5:903:b54c:70cd', '2026-05-15 05:51:55', '2026-05-15 05:52:05', '2026-05-15 06:01:55', NULL, '2026-05-15 05:51:55', '2026-05-15 05:51:55'),
+(3, '2026-05-15', 'yt', '99e5735c4ea662dfe199729e31fac96ade4cfa3c', 'msjmD9tqSXVDVb9moQ4eNEN4aiaMw1rkQhtezDe7', '2401:4900:882e:5078:6907:1090:3bbb:ac13', '2026-05-15 06:55:47', '2026-05-15 06:55:57', '2026-05-15 07:05:47', NULL, '2026-05-15 06:55:47', '2026-05-15 06:55:47'),
+(4, '2026-05-15', 'ig', 'e4a9905c19544f0c967105f4c75399bb72b3da26', 'msjmD9tqSXVDVb9moQ4eNEN4aiaMw1rkQhtezDe7', '2401:4900:882e:5078:6907:1090:3bbb:ac13', '2026-05-15 06:56:18', '2026-05-15 06:56:28', '2026-05-15 07:06:18', NULL, '2026-05-15 06:56:18', '2026-05-15 06:56:18'),
+(5, '2026-05-15', 'tt', '07216e4313622c62275eabc864316e8c0932ef1d', 'msjmD9tqSXVDVb9moQ4eNEN4aiaMw1rkQhtezDe7', '2401:4900:882e:5078:6907:1090:3bbb:ac13', '2026-05-15 06:57:37', '2026-05-15 06:57:47', '2026-05-15 07:07:37', NULL, '2026-05-15 06:57:37', '2026-05-15 06:57:37'),
+(6, '2026-05-15', 'yt', '72b42abe1ee887882d0f709e24e7f1a59389055b', 'TLDcXMQTG1AZ93zpnQ21rwY2ZH45G4hDIHXPZ0bO', '223.185.44.245', '2026-05-15 07:07:58', '2026-05-15 07:08:08', '2026-05-15 07:17:58', NULL, '2026-05-15 07:07:58', '2026-05-15 07:07:58'),
+(7, '2026-05-15', 'ig', '16794c13ec2f8298edf87f5f8eeb78da37a010a0', 'TLDcXMQTG1AZ93zpnQ21rwY2ZH45G4hDIHXPZ0bO', '223.185.44.245', '2026-05-15 07:07:31', '2026-05-15 07:07:41', '2026-05-15 07:17:31', NULL, '2026-05-15 07:07:31', '2026-05-15 07:07:31'),
+(8, '2026-05-15', 'yt', 'cba64b62559ed8da36d5c16e301e8588a95b6530', 'GlnbJ8QrAHyxTAl9WAJBDWJ14ISVJzPDICGFqAQN', '2401:4900:882e:5078:d2c:5756:77ba:9b01', '2026-05-15 11:55:37', '2026-05-15 11:55:47', '2026-05-15 11:58:37', '2026-05-15 11:56:04', '2026-05-15 11:55:37', '2026-05-15 11:56:04'),
+(9, '2026-05-15', 'ig', 'f2d7cca1118538eb173115d5c46329845381bf11', 'GlnbJ8QrAHyxTAl9WAJBDWJ14ISVJzPDICGFqAQN', '2401:4900:882e:5078:d2c:5756:77ba:9b01', '2026-05-15 11:57:18', '2026-05-15 11:57:28', '2026-05-15 12:00:18', NULL, '2026-05-15 11:57:18', '2026-05-15 11:57:18'),
+(10, '2026-05-16', 'yt', '16ce50e975c7bb77694165629edea28081f17100', 't3V8ZD0VlVlhuhJkYDwZuokjdmdVK1mQjqW5wZVB', '2401:4900:882d:7106:20c4:3983:a004:e915', '2026-05-16 00:06:53', '2026-05-16 00:07:03', '2026-05-16 00:09:53', '2026-05-16 00:07:15', '2026-05-16 00:06:53', '2026-05-16 00:07:15'),
+(11, '2026-05-16', 'ig', 'ccf6b9ef0985a574f24933ca72139befa47acdf4', 't3V8ZD0VlVlhuhJkYDwZuokjdmdVK1mQjqW5wZVB', '2401:4900:882d:7106:20c4:3983:a004:e915', '2026-05-16 00:09:45', '2026-05-16 00:09:55', '2026-05-16 00:12:45', '2026-05-16 00:10:14', '2026-05-16 00:09:45', '2026-05-16 00:10:14'),
+(12, '2026-05-16', 'yt', '872e3991bc8012456e70ac7de18adb9c62e2b318', 'zH54t7PJZpnLmuUpWGYIoHu4ef1OXCvX05dHNVFX', '2401:4900:882d:7106:20c4:3983:a004:e915', '2026-05-16 00:11:00', '2026-05-16 00:11:10', '2026-05-16 00:14:00', '2026-05-16 00:11:30', '2026-05-16 00:11:00', '2026-05-16 00:11:30'),
+(13, '2026-05-16', 'yt', '909df610596dacae840d629efc1a7bd43635b888', 'lqTmLaphabWrcyTqf8cPoH8vxmdfbFZaGem8ytRg', '2401:4900:84cd:5f79::736f:2820', '2026-05-16 04:24:35', '2026-05-16 04:24:45', '2026-05-16 04:27:35', NULL, '2026-05-16 04:24:35', '2026-05-16 04:24:35'),
+(14, '2026-05-16', 'yt', 'e075050fdcc1c87ced0b03db2067be16bb0e2f67', '2jigM5dZvc9IVyWf4ooXwNj3XHqkWcnyId35E6W3', '2401:4900:84cd:5f79:1ca7:859d:b230:a098', '2026-05-16 11:43:10', '2026-05-16 11:43:20', '2026-05-16 11:46:10', '2026-05-16 11:43:29', '2026-05-16 11:43:10', '2026-05-16 11:43:29'),
+(15, '2026-05-16', 'ig', '735678901e7ccf9367f77ce028e0463146d0d71a', '2jigM5dZvc9IVyWf4ooXwNj3XHqkWcnyId35E6W3', '2401:4900:84cd:5f79:1ca7:859d:b230:a098', '2026-05-16 11:44:13', '2026-05-16 11:44:23', '2026-05-16 11:47:13', '2026-05-16 11:44:30', '2026-05-16 11:44:13', '2026-05-16 11:44:30'),
+(16, '2026-05-16', 'yt', '6dd8cdef6df3dc6b2b5da390d1e4bdffd5bbf8b2', 'JmhGGUCLPnLlzy8uBx1f1QgmyZeOFQZ2vMulThMd', '2401:4900:84cd:5f79:1ca7:859d:b230:a098', '2026-05-16 12:23:51', '2026-05-16 12:24:01', '2026-05-16 12:26:51', '2026-05-16 12:24:06', '2026-05-16 12:23:51', '2026-05-16 12:24:06'),
+(17, '2026-05-16', 'tt', '3cb4e3f4e81a4fce1d43c955b9d9da2678058343', '3usK0St5YwR60STkRBlxkJxkSH1HzXsBKbRRR9Xw', '2601:248:5680:1730:c917:da1b:336c:a41f', '2026-05-16 12:38:10', '2026-05-16 12:38:20', '2026-05-16 12:41:10', '2026-05-16 12:38:24', '2026-05-16 12:38:10', '2026-05-16 12:38:24'),
+(18, '2026-05-16', 'yt', '063063a63b4f466678c2f631e2b52725a8f48f70', '3usK0St5YwR60STkRBlxkJxkSH1HzXsBKbRRR9Xw', '2601:248:5680:1730:c917:da1b:336c:a41f', '2026-05-16 12:39:36', '2026-05-16 12:39:46', '2026-05-16 12:42:36', NULL, '2026-05-16 12:39:36', '2026-05-16 12:39:36'),
+(19, '2026-05-17', 'tt', '1a5910f304da0fcf90656c2eedc3bca8a7eb880b', 'S2GXXtnRzPso1ZeYAKg1gcHcXmuZqz1jonWF8N1b', '223.185.51.10', '2026-05-17 02:43:44', '2026-05-17 02:43:54', '2026-05-17 02:46:44', NULL, '2026-05-17 02:43:44', '2026-05-17 02:43:44'),
+(20, '2026-05-17', 'yt', '25976da0f8d46ec50756ab3b80cdaa236f702755', 'hiXy78RvA0j2PbEgoyHRApkN2N7KvuDb9PCgCssC', '223.185.51.10', '2026-05-17 10:44:48', '2026-05-17 10:44:58', '2026-05-17 10:47:48', '2026-05-17 10:45:03', '2026-05-17 10:44:48', '2026-05-17 10:45:03'),
+(21, '2026-05-17', 'ig', 'e986e03f8ae780d0850cd7dba327405e41acfdfe', 'hiXy78RvA0j2PbEgoyHRApkN2N7KvuDb9PCgCssC', '223.185.51.10', '2026-05-17 10:45:09', '2026-05-17 10:45:19', '2026-05-17 10:48:09', '2026-05-17 10:45:48', '2026-05-17 10:45:09', '2026-05-17 10:45:48'),
+(22, '2026-05-18', 'ig', 'e979d7d5933f739b90edd70778c3618d405d5136', 'tmJHiID3jsef2OdEeZkjBPQWXNUchfuQT7LnmzaG', '2401:4900:882c:da76:eddf:18a4:72f1:b329', '2026-05-18 15:50:56', '2026-05-18 15:51:06', '2026-05-18 15:53:56', '2026-05-18 15:53:15', '2026-05-18 15:50:56', '2026-05-18 15:53:15'),
+(23, '2026-05-18', 'yt', 'f82314e1925c98ffcb2ab5b7452bc12053155b63', 'tmJHiID3jsef2OdEeZkjBPQWXNUchfuQT7LnmzaG', '2401:4900:882c:da76:eddf:18a4:72f1:b329', '2026-05-18 15:58:22', '2026-05-18 15:58:32', '2026-05-18 16:01:22', '2026-05-18 15:58:39', '2026-05-18 15:53:28', '2026-05-18 15:58:39'),
+(24, '2026-05-19', 'ig', '360e8fcdd14378f6d8a473e098bdea56e144601b', 'caE0uiCaSMeGXKuHFn6Lmjst4cKrrcudDYFI6wBB', '2401:4900:882e:7c3a:eddf:18a4:72f1:b329', '2026-05-19 00:04:10', '2026-05-19 00:04:20', '2026-05-19 00:07:10', NULL, '2026-05-19 00:03:57', '2026-05-19 00:04:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `creator_link_winners`
+--
+
+CREATE TABLE `creator_link_winners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `winner_date` date NOT NULL,
+  `platform` varchar(20) NOT NULL,
+  `submission_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `winner_link` text NOT NULL,
+  `clicks` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `creator_link_winners`
+--
+
+INSERT INTO `creator_link_winners` (`id`, `winner_date`, `platform`, `submission_id`, `winner_link`, `clicks`, `created_at`, `updated_at`) VALUES
+(1, '2026-05-14', 'yt', NULL, 'https://www.youtube.com/shorts/FjW6ZZGeqZ8', 12, '2026-05-14 15:34:50', '2026-05-14 15:34:50'),
+(2, '2026-05-14', 'ig', NULL, 'https://www.instagram.com/p/Bh8psJYH1lq', 8, '2026-05-14 15:34:50', '2026-05-14 15:34:50'),
+(3, '2026-05-14', 'tt', NULL, 'https://tiktok.com', 1, '2026-05-14 15:34:50', '2026-05-14 15:34:50'),
+(4, '2026-05-15', 'yt', NULL, 'https://www.youtube.com/shorts/FjW6ZZGeqZ8', 10, '2026-05-16 00:00:04', '2026-05-16 00:00:04'),
+(5, '2026-05-15', 'ig', NULL, 'https://www.instagram.com/p/Bh8psJYH1lq', 7, '2026-05-16 00:00:04', '2026-05-16 00:00:04'),
+(6, '2026-05-15', 'tt', NULL, 'https://tiktok.com', 6, '2026-05-16 00:00:04', '2026-05-16 00:00:04'),
+(7, '2026-05-16', 'yt', NULL, 'https://youtube.com/shorts/FjW6ZZGeqZ8?si=EkKvT-vp7OKBogrI', 3, '2026-05-17 00:00:02', '2026-05-17 00:00:02'),
+(8, '2026-05-16', 'ig', NULL, 'https://www.instagram.com/p/Bh8psJYH1lq', 1, '2026-05-17 00:00:02', '2026-05-17 00:00:02'),
+(9, '2026-05-16', 'tt', NULL, 'https://www.tiktok.com/@mrbeast/video/7634583942254972190?is_from_webapp=1&sender_device=mobile&sender_web_id=7640466779693630989', 1, '2026-05-17 00:00:02', '2026-05-17 00:00:02'),
+(10, '2026-05-17', 'yt', NULL, 'https://youtu.be/oLVS1nlNBDw?si=9Wwh-7kliINLuGii', 9, '2026-05-18 00:00:02', '2026-05-18 15:58:22'),
+(11, '2026-05-17', 'ig', NULL, 'https://www.instagram.com/p/Bh8pl05nGWs/?igsh=NG44MHgxdGtnZXM4', 1, '2026-05-18 00:00:02', '2026-05-18 15:50:56'),
+(12, '2026-05-17', 'tt', NULL, 'https://tiktok.com', 0, '2026-05-18 00:00:02', '2026-05-18 00:00:02'),
+(13, '2026-05-18', 'yt', NULL, 'https://youtu.be/gyb2QG6T5jg?si=7WS0zHPbd-FzeT4y', 0, '2026-05-19 00:00:03', '2026-05-19 00:00:03'),
+(14, '2026-05-18', 'ig', NULL, 'https://www.instagram.com/p/DYedBbriPPB/?igsh=Y3duY3JuOWNzM2di', 2, '2026-05-19 00:00:03', '2026-05-19 00:04:10'),
+(15, '2026-05-18', 'tt', NULL, 'https://tiktok.com', 0, '2026-05-19 00:00:03', '2026-05-19 00:00:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job_batches`
+--
+
+CREATE TABLE `job_batches` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext NOT NULL,
+  `options` mediumtext DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '0001_01_01_000001_create_cache_table', 1),
+(2, '0001_01_01_000002_create_jobs_table', 1),
+(3, '2026_05_14_120452_create_sessions_table', 1),
+(4, '2026_05_14_124715_create_visitor_logs_table', 1),
+(5, '2026_05_14_125833_create_creator_link_tables', 1),
+(6, '2026_05_14_132000_create_creator_link_winners_table', 1),
+(7, '2026_05_18_050220_create_settings_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('2yHoPHI9WDPzjavEXivthDvuLTk0ARM7NbHi0X2C', NULL, '192.36.109.104', 'Mozilla/5.0 (Linux; U; Android 13; sk-sk; Xiaomi 11T Pro Build/TKQ1.220829.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/112.0.5615.136 Mobile Safari/537.36 XiaoMi/MiuiBrowser/14.4.0-g', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoickVGS0lkam10WElqc0x5UmFuQ3pBOFdLd0pRdUNEaXlNSXNUbjBWcSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779105029),
+('5bZyDQCG6MYKqPTDbvS8ZyTsWNnVbfyk3Zpup2MF', NULL, '198.244.240.246', 'Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVElJUXJvWE0weG83SEg5QTFkR3h5MmxFREJiZko4WlpYMjlZZE1INyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779136553),
+('8C6NdfKYfxk6P7fUQBR4qyqUbMZ5rZzsdPUzJhrp', NULL, '147.182.150.128', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU2NWY1VZUDN1bUNEd2FOeFpiOFcxQ0ZBbWpjYWhNT0hTcnl2N3lMSCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779095837),
+('8gXGABoak9IdMOLmgMoGiDvQVdj4QyU7Z8wBS8Fl', NULL, '106.75.66.103', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 8_1) AppleWebKit/544.48 (KHTML, like Gecko) Chrome/71.0.2367 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ2dmRFA5cndIcU5zTWV4U3dleGpkdjNFSVJOSldTUk1zNFpCUndySyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779126193),
+('9IJH5UCMbppIm0K5rEyRawPpq3u1ABx67AQH6K4a', NULL, '9.142.21.91', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZVY4MEtGNkt5Uk5OaDRlWGlwbW9CeXV5cjJoZzMyTUp6YjNWcUZvcSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779160675),
+('b5i7g4MEQ9h9ivSv5KopoKeDnDkM2I5bcoGqfsfi', NULL, '66.249.73.164', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMTJwYnpCdFRNWnZmYTVBWGtkem1yREhEM29xN1RteHBqOFF1NEVvWiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779106009),
+('bGubM4XYgYC7lD0GfSyMWaj2BsjTL6yymdBmpoLN', NULL, '46.138.250.165', '', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMEVJTXBmTWJDbVV5TGRGcDNTb0Fhem1sUXR1QzFzRTE1aXhTMVRLayI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779166982),
+('C3z5lYP35787o5QfzQRJkxcblQETzRfcUeF2vwO2', NULL, '192.36.109.115', 'Mozilla/5.0 (Linux; U; Android 13; sk-sk; Xiaomi 11T Pro Build/TKQ1.220829.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/112.0.5615.136 Mobile Safari/537.36 XiaoMi/MiuiBrowser/14.4.0-g', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaVpWMGRvcFFZNHVsQ3ZaZjhERmNHa3JpbTVaVWZybVhzblp6c2FKeiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8veXRpZ3R0LmNvbS9jb21tdW5pdHktZ3VpZGVsaW5lcyI7czo1OiJyb3V0ZSI7czoyMDoiY29tbXVuaXR5LWd1aWRlbGluZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1779105030),
+('caE0uiCaSMeGXKuHFn6Lmjst4cKrrcudDYFI6wBB', NULL, '2401:4900:882e:7c3a:eddf:18a4:72f1:b329', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiamVjNjRHbXJBVUVsd0ZuVFh3MDYyNFFlS0VzcjdsVVY2VGFlWlFQcSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779149104),
+('cQ9fltM78frynoBogii9ftepnR4lI4lmZgkTwzJj', NULL, '2a02:4780:3:1::3', 'Go-http-client/2.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieDJoY3pwZHdhanJUZUZ3R0JLQVlQdFg4WldwNEJCeUFsYUptVHZhcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779091248),
+('EmZF6EugPvnv3fU8A9Ac3IceDtqabccJdqDfKPBf', NULL, '192.71.142.40', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/122.0.6261.89 Mobile/15E148 Safari/604', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWmMyZVc1bzlzZTdzNWkxS1FtZGxaUDNXcDRjMUpGTHYyTnc1dDl0MiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHBzOi8veXRpZ3R0LmNvbS9hZHZlcnRpc2luZy1wb2xpY3kiO3M6NToicm91dGUiO3M6MTg6ImFkdmVydGlzaW5nLXBvbGljeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779091026),
+('euac2UyhaP2jQsMFKx0fNLWFNHsp9rUf3RmjzmY0', NULL, '66.249.73.164', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTVFFajBHbm9tWXRvU2FaV0diOVlsakxFUkRZTzZ2UXVoTEJwb3owRyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779106009),
+('fCnrlbjofEW6vYwM7BuFoH7EfveeBPXwD9kOrNWl', NULL, '66.249.73.167', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.7778.96 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVVJGWkk2bEFrcWE2Z3BoRHU2T3dnUHc0eG50Zm55Mmw5UzFZM3pFTCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779149785),
+('gR0RNn1MDL8s6f2KuLU1n9oi48f6dJbpF1i1iv9j', NULL, '2401:4900:84d9:5120::74f1:ee74', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiS25mam9pc3dXM1VSdlM1NktnZkpxQndYdVZnU3NWNE1DN3N5ekRXbCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779153754),
+('IHQcn44QVUvAxWBaYKZKXcLv0kWPhswrdT7sWQWw', NULL, '2401:4900:88d4:b43f:5517:3a70:7d0d:166e', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMFdFaDZwZ2xXb0NhekRNS21lZjNFMEtqclRnUmxNa2IyV1VPazZjciI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779168467),
+('ip02ouQ7dQO9gWjo6aryAFVL8ELzsIRnmYRXKHS7', NULL, '20.219.23.189', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic0NnQVlnblhtclFLNUNTcnJqRHhLd2xoZTZFUVVrSDVCeWowc2JIQyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779139294),
+('ktd6vPXUyKoWGDr9EbgZBnEnXRARG6nDo8Mx5uIj', NULL, '198.145.79.218', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.3', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibkN0YmNUZjFiVm5VSFRDbExWR1NPVHdCVEo5MjFjSnE3UmxSU2MzSCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779111576),
+('LQL4z2Lx8Or1yJFcm0LEyBXgkstitnUcj11JVQVg', NULL, '194.103.212.184', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/122.0.6261.89 Mobile/15E148 Safari/604', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOVdrMHdjb1lrZkpqZlhCclpMUDR1cTVzdThuM0pCY1YyUDBUN3lENCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHBzOi8veXRpZ3R0LmNvbS9hY2NlcHRhYmxlLXVzZS1wb2xpY3kiO3M6NToicm91dGUiO3M6MjE6ImFjY2VwdGFibGUtdXNlLXBvbGljeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779091025),
+('nwcUyr6v1r4L0Vfc6VzX69nESVaagJokibrINzMP', NULL, '223.185.48.108', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWGRyTlpHT1JjbGFVRFZ2Y2VGUEZidEdKR0xOcm5ieFlIYXZHSVN2diI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779107989),
+('oNhFbnZywvPMsgBrOejIraURws6C4zWSQ0Sw64uu', NULL, '66.249.73.165', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidWNVT3ZQdmdTUHBVV2RQQ2JkM2tpUmNZa3RTZEU5M3F3OEFKSm1pSyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779102535),
+('qGT3dvd1ND56zHAP1PNQviKTuHdmR77zzQsccRil', NULL, '2401:4900:882e:7c3a:f9b6:6b6b:4e7e:8795', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVUljc2xXUkk2MDdOZ3JPYmlqMGJMMjJNNkxpMG92UFVWNjZRdkRlQiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779169297),
+('QM87BYtkWfiRGPr5gvlTEvGH3pdcDtuvK7gf2i6U', NULL, '64.225.60.43', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoic1ZlSnUxMTFPZWJDN1BFUEo0a0dFSkowSHMzZjJTVFRYbWg2SzI4RiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779091647),
+('qnFYFIUJBWob5BzZDmMQ7WMGjEPnSZcvOPnchw52', NULL, '192.36.109.73', 'Mozilla/5.0 (Linux; U; Android 13; sk-sk; Xiaomi 11T Pro Build/TKQ1.220829.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/112.0.5615.136 Mobile Safari/537.36 XiaoMi/MiuiBrowser/14.4.0-g', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTmZkMGpIa3R5SnEydXFnSGQ3NWU5WlYxVTR3aVFiT0NpbmV5SjFISiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHBzOi8veXRpZ3R0LmNvbS9hZHZlcnRpc2luZy1wb2xpY3kiO3M6NToicm91dGUiO3M6MTg6ImFkdmVydGlzaW5nLXBvbGljeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779105031),
+('qNg6YgFI36LuDGEjsOUN93ZeYEEB6lsrojVK4xuI', NULL, '66.249.73.165', 'Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiY1NFSGlIZDkzWFpXdmRUREdwNmpmbmtlWFpUdmFGYXhXYnF6MkV3TSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779102535),
+('QsjG3Vi8CZmBH0q8cqSZ355N3q5urVomN8t9Kyk3', NULL, '2401:4900:882c:da76:eddf:18a4:72f1:b329', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiaEJIR1h6SmZuRXB3d2cwWDlTSWdSSlpPeWxxS3NkQVQwdDgyZWZOYyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779125775),
+('rOMBLZbanEJqv0CGrIZxqmprFknlYgtRz0JpomTO', NULL, '192.36.109.131', 'Mozilla/5.0 (Linux; U; Android 13; sk-sk; Xiaomi 11T Pro Build/TKQ1.220829.002) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/112.0.5615.136 Mobile Safari/537.36 XiaoMi/MiuiBrowser/14.4.0-g', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiWFlTOFBWOUJQWXI0RXY4ek81TmRlNzJGQ1dPZUhmY1N3cmFmOElxWSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHBzOi8veXRpZ3R0LmNvbS9hY2NlcHRhYmxlLXVzZS1wb2xpY3kiO3M6NToicm91dGUiO3M6MjE6ImFjY2VwdGFibGUtdXNlLXBvbGljeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779105030),
+('sGw4zCgFdTOLCISED2yG1jHvvlbPRdias0Lw9U8I', NULL, '2a02:4780:3:1::3', 'Go-http-client/2.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiekw3djlTTXpVclZsYkh3TjNNWHpwYzlyMThwU3JJaWMyZUhrTDdidSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779165040),
+('THIubGZIQZTfsCE97Ku9tlkEREfZLoZwXVmyEhDu', NULL, '192.71.126.151', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/122.0.6261.89 Mobile/15E148 Safari/604', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSU80TjFrcE9WNmVZZ0loaDBrdkhQalN6YWRwQm9iUElxMzJycVdxcyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8veXRpZ3R0LmNvbS9jb21tdW5pdHktZ3VpZGVsaW5lcyI7czo1OiJyb3V0ZSI7czoyMDoiY29tbXVuaXR5LWd1aWRlbGluZXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1779091025),
+('tmJHiID3jsef2OdEeZkjBPQWXNUchfuQT7LnmzaG', NULL, '2401:4900:882c:da76:eddf:18a4:72f1:b329', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieU9oSGt0VnVmdTk0eXdmblRhZFQyOVVlSXFrNVhyWVdrWTNZUTdWViI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779119922),
+('TpuNDQPrKeDhg8MIFiL1tQ5lz5WxVKDVZn29OyEr', NULL, '2401:4900:882e:7c3a:57c2:aa18:f79a:85b3', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTVVuUTB3QVhDeFFPRk1od0ZVMml3dlhDMWNOeUpPSzl2ZDlYRFl4ZiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779155129),
+('U3tCmNCvttRLCB6Pbb1hbyTF3eswbunstsKjY0AD', NULL, '23.27.145.4', 'Mozilla/5.0 (X11; Linux i686; rv:109.0) Gecko/20100101 Firefox/120.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiME5Ha1FhaVI1SFVGQ1QwRmdEdGZZQTdod0w3cXJUN1B5YXluTGJ2bCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MjI6Imh0dHBzOi8vd3d3Lnl0aWd0dC5jb20iO3M6NToicm91dGUiO3M6NDoiaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1779127347),
+('ZbINOltBYuLvWZCMeNVi4Eh9AdBXfFxtUXRX53Hw', NULL, '192.71.2.57', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/122.0.6261.89 Mobile/15E148 Safari/604', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoia2pOemRnZHNpVzg3UUVJclhoa3ZGUHFYb1NoZ2NxRUJOTVFIVWRSWiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779091024),
+('ZkhNGzgzUo0VEdh08jfr7C64hij16rWlPKE7CdG5', NULL, '46.138.250.165', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 AISearchIndex.space', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibWZIb01BaWpGVkk3WmRVM1hrZ3pYemJNMlJUZWhvc2JzT09lQVZvRyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779166980),
+('ZqpJQcd7JvyeYud2z7caaLsI9xXjj2WDTT069YQ8', NULL, '44.212.244.90', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieFlrd2lWekdvRzd2QVB0NXBBNUtYSG5VUEU1bXNPRkYwY21iM1JxeiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MTg6Imh0dHBzOi8veXRpZ3R0LmNvbSI7czo1OiJyb3V0ZSI7czo0OiJob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1779116350);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(255) NOT NULL,
+  `value` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `key`, `value`, `created_at`, `updated_at`) VALUES
+(1, 'total_submissions', '9', '2026-05-18 05:16:29', '2026-05-18 15:58:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visitor_logs`
+--
+
+CREATE TABLE `visitor_logs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `session_id` varchar(255) NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent_hash` varchar(64) DEFAULT NULL,
+  `visited_on` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `visitor_logs`
+--
+
+INSERT INTO `visitor_logs` (`id`, `session_id`, `ip_address`, `user_agent_hash`, `visited_on`, `created_at`, `updated_at`) VALUES
+(1, 'dGsCZXI3XQ0aNA1S7oZkOfLziddJzgDtD0NdFN5K', '44.212.244.90', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-14', '2026-05-14 15:37:03', '2026-05-14 15:37:03'),
+(2, 'P9BtKnNwL84a6uJgGwHHrAaiETDlcBOLvQCkgiHL', '194.230.158.210', '5beaa3b505de56996b1f0d12f63f1696c36ac6f62cb9fd28fe57be3a7bacbfb9', '2026-05-14', '2026-05-14 16:20:07', '2026-05-14 16:20:07'),
+(3, 'hKB42nmQdUWrWIOoNhUPtW19uYQcIbMbHikDCXiZ', '100.31.202.79', '93471414a280d667b4d37824ff5e6b205d7e14c7467624e0e1e6b66bce483db2', '2026-05-14', '2026-05-14 18:03:18', '2026-05-14 18:03:18'),
+(4, '6eQl2uYYH3rwv8u4wId8zTe6pVsmTJjPYG5Ndmbk', '2401:4900:882e:5078:7d56:5eed:1eba:2b34', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-14', '2026-05-14 19:33:32', '2026-05-14 19:33:32'),
+(5, 'Iny9WwJpzExmtycTqMKTBTw4NtvD2Cs8UXP1t7lV', '104.168.71.148', '031e6249d3395c48b0cb0135a2325727610b347c69b597d259f42884794031fe', '2026-05-14', '2026-05-14 20:50:57', '2026-05-14 20:50:57'),
+(6, 'aRhYdfmHIAX766yGZYEMLz9gkLa9yRbPZbvy6eJJ', '104.168.71.160', '031e6249d3395c48b0cb0135a2325727610b347c69b597d259f42884794031fe', '2026-05-14', '2026-05-14 20:51:31', '2026-05-14 20:51:31'),
+(7, '0pj0pktUjtdagPJRoAdRT8C5nEQcdsArT56Pvrw5', '104.168.71.172', '031e6249d3395c48b0cb0135a2325727610b347c69b597d259f42884794031fe', '2026-05-14', '2026-05-14 20:53:01', '2026-05-14 20:53:01'),
+(8, 'gVwRAXcUBJJgI1hy6cvqrRuXpcoCiGnvwdEDTy5e', '2a02:4780:3:1::3', '1c5c75fda7279264269435437b955840025da8baa92b3d4b3e0cca9349723f71', '2026-05-15', '2026-05-15 03:15:05', '2026-05-15 03:15:05'),
+(9, 'W3O2a5gI7sFGZ71Wj5CskNu0shJXSiBu3ZOmdXcY', '2401:4900:891c:8789:14d5:903:b54c:70cd', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-15', '2026-05-15 05:52:02', '2026-05-15 05:52:02'),
+(10, 'msjmD9tqSXVDVb9moQ4eNEN4aiaMw1rkQhtezDe7', '2401:4900:882e:5078:6907:1090:3bbb:ac13', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-15', '2026-05-15 07:36:14', '2026-05-15 07:36:14'),
+(11, 'TLDcXMQTG1AZ93zpnQ21rwY2ZH45G4hDIHXPZ0bO', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 07:39:39', '2026-05-15 07:39:39'),
+(12, '7Y0ZoSYi4OYm4OxHu5trxVJQVFDy0lBNc9BjuZpb', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 07:41:29', '2026-05-15 07:41:29'),
+(13, 'ihV7YAivJzxvpYjCx1OYvmPiDUlQBkonH5Pb8yHJ', '193.0.203.158', 'f87006d4d0ff435fb19878ccdcab5f5c6eac00ef98dae430a74f2689320f4b98', '2026-05-15', '2026-05-15 07:16:33', '2026-05-15 07:16:33'),
+(14, '5Z5tOsU0LJEpnOWbjqnReguGAt24qgHLYL1taU8f', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 07:39:47', '2026-05-15 07:39:47'),
+(15, 'pxKEvYloAxau0RprphawD2B1dJOKnvr96CWYJ1k7', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 08:13:48', '2026-05-15 08:13:48'),
+(16, 'dokzE4OVGduJUHJhOFpshSDhkns9VkDWlicC1IX6', '2a03:b0c0:1:e0::c00:9001', 'bd33e731a9dc71ed698fb3458da6dbe5d3ecceab239d26bc9d1da14c96e63705', '2026-05-15', '2026-05-15 09:12:56', '2026-05-15 09:12:56'),
+(17, 'CMXr3lpjNukDly7CH7GNM49HEWMpbPEGHNQd56xs', '44.212.244.90', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-15', '2026-05-15 12:30:22', '2026-05-15 12:30:22'),
+(18, 'GlnbJ8QrAHyxTAl9WAJBDWJ14ISVJzPDICGFqAQN', '2401:4900:882e:5078:d2c:5756:77ba:9b01', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 12:01:25', '2026-05-15 12:01:25'),
+(19, 'HA7mV1cBIjbOZThcDOnlNWOOCRREHXHDpjdPs8Vc', '103.105.165.2', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-15', '2026-05-15 11:59:07', '2026-05-15 11:59:07'),
+(20, '98RNdLNavF6SK0HCXVSOjbOFdOK6jtmC9ifRGaOr', '2401:4900:882e:5078:b950:a570:f900:bb77', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-15', '2026-05-15 13:12:45', '2026-05-15 13:12:45'),
+(21, 've7CQetphDwMTEYJjyFdjGSUveeg0ZfeXrXAY0lo', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 13:04:44', '2026-05-15 13:04:44'),
+(22, 'WCmRnfxOVmPS7lwM7f2nSXd8n6U13azlHMxVawIw', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 13:34:09', '2026-05-15 13:34:09'),
+(23, 'EKEKC7K9jVvjbufqOKE8FiwFR06uqGryxzuuZIcV', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 14:27:33', '2026-05-15 14:27:33'),
+(24, '56mcfxBbrw5M2yvDw2qp9MS9TMSGXwK5jUTPLD0k', '192.36.109.104', '24f5b55fbe5ec90cb73724da19c4bb8486e1d2555f864239d0316cbbeb742714', '2026-05-15', '2026-05-15 14:10:28', '2026-05-15 14:10:28'),
+(25, '9BgVlrcjHl1qM9xxTXEYwyEnyuuGpI4UJajfPtL3', '188.245.193.111', 'ca9b2eafc1cd86346d14d7fab560d7bbcb4ef7ea94490e12e77e8bb2d2999c12', '2026-05-15', '2026-05-15 14:41:38', '2026-05-15 14:41:38'),
+(26, 'ovVOG1QHzaxs1DioLF1gFdWCuSSyiPv2bk2agjiN', '188.245.193.111', '1ace7c009ec1a0dd50f69d8421ae8228ede5bff16fba0232d7ae8764cc994bfb', '2026-05-15', '2026-05-15 14:41:39', '2026-05-15 14:41:39'),
+(27, 'UFBMHEj5lOyweZSiKyVqFS0rGPGCDuQQuZkUrgQ5', '94.130.10.218', '10ddb9c251e46060439cb8dc734b7d52a5d1b67e210f4dce7a0a82863080753f', '2026-05-15', '2026-05-15 15:09:48', '2026-05-15 15:09:48'),
+(28, '5gkSafv9zf16ZvFeyW9XeY5K8MdHsw8CJIZG6dVk', '94.130.10.218', '10ddb9c251e46060439cb8dc734b7d52a5d1b67e210f4dce7a0a82863080753f', '2026-05-15', '2026-05-15 15:19:43', '2026-05-15 15:19:43'),
+(29, 'HPb3jzeHPs5jTaqMjiuv4k0RnggcNeuH604ehQop', '94.130.10.218', '10ddb9c251e46060439cb8dc734b7d52a5d1b67e210f4dce7a0a82863080753f', '2026-05-15', '2026-05-15 15:42:49', '2026-05-15 15:42:49'),
+(30, 'xbXd9FnDhj4vkMct1kY5O3Wr8FsUy4Bxjm2OzbGA', '192.71.126.27', '59f6a067be15fd36eec974f939574c9fe2ca17d4b742f4a0385eb786f029d0a5', '2026-05-15', '2026-05-15 16:50:07', '2026-05-15 16:50:07'),
+(31, 'hcCvfZLBqfnqXKNoL7EfhogFlSDMvNPDuOBCaBKY', '2401:4900:882e:5078:8ccc:b75b:6ae4:305f', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 17:17:07', '2026-05-15 17:17:07'),
+(32, 'RtbHP78q2bIpuKHJ2oMJoRiFQ4RmBMw3CMl5d6XO', '188.245.193.111', 'ca9b2eafc1cd86346d14d7fab560d7bbcb4ef7ea94490e12e77e8bb2d2999c12', '2026-05-15', '2026-05-15 17:09:42', '2026-05-15 17:09:42'),
+(33, 'WIT9zHAIa3Zwj21MDwSEu9KcElTBBxzPE17yJ9ri', '223.185.44.245', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 17:12:05', '2026-05-15 17:12:05'),
+(34, 'RHFmYXObewydruLreX2SvbNp5fQXJRrkOl0webaN', '2401:4900:8257:6220::7321:4459', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 17:19:15', '2026-05-15 17:19:15'),
+(35, '7NOfhkTdkcqvlK4o39ZlDNDimfqZjE1ToWw7WPmr', '103.105.166.216', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-15', '2026-05-15 17:48:24', '2026-05-15 17:48:24'),
+(36, 'OiME5IJJOhqmcWAbcMIcTqAEoIQSvsYBt4rJ32vZ', '188.245.193.111', 'ca9b2eafc1cd86346d14d7fab560d7bbcb4ef7ea94490e12e77e8bb2d2999c12', '2026-05-15', '2026-05-15 18:07:08', '2026-05-15 18:07:08'),
+(37, '1KSKWLCCebcysjpqb7KQ0wKMliM0Y6otmhp27Xnb', '92.222.104.222', 'afd918cf2db87d7f8a790c965a0cd0502bb558df606cdd6ee8316afee68b668b', '2026-05-15', '2026-05-15 20:34:25', '2026-05-15 20:34:25'),
+(38, '5btJUQDGXzwHA2LLPB9FI1DL01BYEoDlR76NvH31', '52.73.244.206', 'f873cb3aaeeccc99c1b70220d27bf89c734cfb356149aad1cb9e36f855bf126d', '2026-05-15', '2026-05-15 21:19:14', '2026-05-15 21:19:14'),
+(39, 'RjOd6FV5L0lYOqonso6irJvH4z2kkiPW2TPSyZCo', '52.73.244.206', '1bcc9eae1df41fe351c44a7626592eb7cd3a9d4776e1f75d16f53badc13108cf', '2026-05-15', '2026-05-15 21:19:14', '2026-05-15 21:19:14'),
+(40, 'RDBVQ0iw9vYKXcrN6M79ccUswjejcXOlyfWSPh0Q', '20.219.23.189', 'a0507f494ae19f4e73e14d4331c1a46bc32ad0e2e67fc587ff98e005c350c9b8', '2026-05-15', '2026-05-15 22:44:41', '2026-05-15 22:44:41'),
+(41, 'PEDCGxaV4FqOX2c7KhttSgaA67DEG5I06WH4i0jx', '2401:4900:882d:7106:20c4:3983:a004:e915', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-15', '2026-05-15 23:59:49', '2026-05-15 23:59:49'),
+(42, 'PEDCGxaV4FqOX2c7KhttSgaA67DEG5I06WH4i0jx', '2401:4900:882d:7106:20c4:3983:a004:e915', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 00:00:33', '2026-05-16 00:00:33'),
+(43, 't3V8ZD0VlVlhuhJkYDwZuokjdmdVK1mQjqW5wZVB', '2401:4900:882d:7106:20c4:3983:a004:e915', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 00:10:33', '2026-05-16 00:10:33'),
+(44, 'zH54t7PJZpnLmuUpWGYIoHu4ef1OXCvX05dHNVFX', '2401:4900:882d:7106:20c4:3983:a004:e915', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 00:12:06', '2026-05-16 00:12:06'),
+(45, '5jwP28erRZPwp1wVt0SKCn6rsfRyGC79Y3vsi3HB', '2a02:4780:3:1::3', '1c5c75fda7279264269435437b955840025da8baa92b3d4b3e0cca9349723f71', '2026-05-16', '2026-05-16 02:33:52', '2026-05-16 02:33:52'),
+(46, 'mspz4oHkfVfI7wRECx7K9lZzJFryoCTPeNJpH1op', '205.169.39.192', '689090aec6e05bf408fcbb335182bf9eac03760da7e76710c7541120e15e5355', '2026-05-16', '2026-05-16 02:42:16', '2026-05-16 02:42:16'),
+(47, 'vJqmHjInm4iGABbpBZp9YXAoxfXelLKSaBiqfwRS', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 04:06:19', '2026-05-16 04:06:19'),
+(48, 'lqTmLaphabWrcyTqf8cPoH8vxmdfbFZaGem8ytRg', '2401:4900:84cd:5f79::736f:2820', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 04:16:49', '2026-05-16 04:16:49'),
+(49, '8iQDUR4TY3VUZRURtUIZWlXudQYKZg0uVyxivxAz', '188.170.74.126', 'f87006d4d0ff435fb19878ccdcab5f5c6eac00ef98dae430a74f2689320f4b98', '2026-05-16', '2026-05-16 06:01:19', '2026-05-16 06:01:19'),
+(50, 'fB8ibUqvYEgIMQHOUiBteMuS45Qj1Xevo3cy3twd', '178.128.228.78', '61b88f0a9f3157393f99888d9f51835502e99b3ad2e00a9cfc40020f217e4214', '2026-05-16', '2026-05-16 06:13:57', '2026-05-16 06:13:57'),
+(51, 'pu4oTlCpXHZwEC3Z2wOTBX5h1YqMrHgwZrfWXpVC', '2a01:4f8:271:16af::2', 'ea717ae81273d1aeb3d301800e7c7c31371e5891d0f707999b7822debf6a17b4', '2026-05-16', '2026-05-16 09:58:29', '2026-05-16 09:58:29'),
+(52, 'NtSuTMBhBpYdTNHFSS4pLom7wHcNtTQcoovC4zXz', '23.27.145.146', 'eb661d7d1bfc2c294df00e6aee2ae1dec524e0f3d513298d3eefb8356e693646', '2026-05-16', '2026-05-16 11:22:42', '2026-05-16 11:22:42'),
+(53, '2jigM5dZvc9IVyWf4ooXwNj3XHqkWcnyId35E6W3', '2401:4900:84cd:5f79:1ca7:859d:b230:a098', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-16', '2026-05-16 12:23:18', '2026-05-16 12:23:18'),
+(54, 'HnqfJFqED1sDislqgyOpbTgSMrLpTduZrGvQgdmI', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 12:15:42', '2026-05-16 12:15:42'),
+(55, 'JmhGGUCLPnLlzy8uBx1f1QgmyZeOFQZ2vMulThMd', '2401:4900:84cd:5f79:1ca7:859d:b230:a098', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-16', '2026-05-16 12:24:07', '2026-05-16 12:24:07'),
+(56, '5dEA4dRIZmtL1VEc8COvMhyeArE89GAYK2reoMSP', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 12:45:10', '2026-05-16 12:45:10'),
+(57, 'DxHT9cCOHSqQKI1uymDYufeOLORxoqaBr0D4nUwC', '223.185.51.10', 'f3223b23c398929272aefa571e46f95f96f1459c234d3e7cdf5f8cbe42189d71', '2026-05-16', '2026-05-16 12:27:32', '2026-05-16 12:27:32'),
+(58, '3usK0St5YwR60STkRBlxkJxkSH1HzXsBKbRRR9Xw', '2601:248:5680:1730:c917:da1b:336c:a41f', '7942ea146bbea3d37c23842b2f5e35ef86699c60b09d4cf4dae35b41a0eb1e31', '2026-05-16', '2026-05-16 12:39:09', '2026-05-16 12:39:09'),
+(59, 'v6yyaaNpOz0OkzDWxGvmC1BgjZnjgv1T0ZGY5rVW', '23.27.145.75', 'e463666c37a4a0156adaf7ef8e685f340f69e0adb04d9df79bad3cc9ff23cfd0', '2026-05-16', '2026-05-16 13:35:13', '2026-05-16 13:35:13'),
+(60, 'Hqz56kun987TWQ72WY5c4dxhMl1Cq0V1fjI8Ex76', '45.56.158.239', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-16', '2026-05-16 14:46:45', '2026-05-16 14:46:45'),
+(61, '1i9akA0wjIS0EPYjoYuGtBBdVGpoY4dQq2P174Qh', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-16', '2026-05-16 15:11:04', '2026-05-16 15:11:04'),
+(62, 'S7jv3Ny0iQs6MkZYWTthMVfx1vjqcdj5JtCWJNSN', '158.173.241.17', '7526c00e18367b920e093b58c42973f7ef17b0623f24232159ddf110f63f8cbf', '2026-05-17', '2026-05-17 00:43:21', '2026-05-17 00:43:21'),
+(63, 'kGG4XytoSjb5LZFWPQAFsWfpi92ajSi9mcABZe6K', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-17', '2026-05-17 02:41:09', '2026-05-17 02:41:09'),
+(64, 'S2GXXtnRzPso1ZeYAKg1gcHcXmuZqz1jonWF8N1b', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-17', '2026-05-17 02:43:31', '2026-05-17 02:43:31'),
+(65, 'qC3keY87L8SPlsndszcpI3V94eEHiXa3BLj9t7NL', '94.152.186.69', 'a59685e43b0ef4fb9f3e6765d2231094176e05dfffb8e5fee61f4dc35a0cf87f', '2026-05-17', '2026-05-17 03:30:06', '2026-05-17 03:30:06'),
+(66, 'VZr4hgwDzbpfyQyAQQA7y3UedH1MMaEznsZUmkdM', '2a02:4780:3:1::3', '1c5c75fda7279264269435437b955840025da8baa92b3d4b3e0cca9349723f71', '2026-05-17', '2026-05-17 04:07:50', '2026-05-17 04:07:50'),
+(67, 'Ak9SXIkzxplwimiPX2daVFbV4OR9v1rsUG06iV1z', '2001:4ba0:cafe:c13::1', 'e4bd7e97f69c1093d0acfd3f10328d0489f2dd7a29837dd444d95593ef7d6b84', '2026-05-17', '2026-05-17 04:40:59', '2026-05-17 04:40:59'),
+(68, '7DXX758SP1eIjLsjjrhVIG3kX7F5AGbAhNxP6AZc', '192.71.10.105', '08bd09910e8ab6ffe3250c0a88ccce17f4e37425cbfc738ae20707249dc69b39', '2026-05-17', '2026-05-17 05:09:59', '2026-05-17 05:09:59'),
+(69, 'islUY3QLPMBIhkNJBbd4Uux2J1FDtFuqBRQxw1EF', '2401:4900:882d:7106:b8fb:faeb:89d7:2ad5', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-17', '2026-05-17 05:39:33', '2026-05-17 05:39:33'),
+(70, 'aoH5zHn4rjSAZALX0UozTyq9QuarLduwTaKai2mm', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-17', '2026-05-17 08:53:20', '2026-05-17 08:53:20'),
+(71, '8c64efuc6RySEB0Oclm62eF0W0rHuMSwgBcICv7y', '2401:4900:882d:7106:b8fb:faeb:89d7:2ad5', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-17', '2026-05-17 09:40:59', '2026-05-17 09:40:59'),
+(72, 'hiXy78RvA0j2PbEgoyHRApkN2N7KvuDb9PCgCssC', '223.185.51.10', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-17', '2026-05-17 10:45:56', '2026-05-17 10:45:56'),
+(73, '1kV9xeNP136Mn8P9vIB7of5eoJWN8us7useNAgHD', '23.27.145.18', 'eb661d7d1bfc2c294df00e6aee2ae1dec524e0f3d513298d3eefb8356e693646', '2026-05-17', '2026-05-17 11:28:38', '2026-05-17 11:28:38'),
+(74, 'UppHd69XcCK9VinHLeBtGUN9spM9jiIxXNJzLpvH', '107.175.39.153', 'c122bee74044420def7f9929a4ce5ca8510b2d868f61231851ac8caea780fc23', '2026-05-17', '2026-05-17 14:41:58', '2026-05-17 14:41:58'),
+(75, '13iIadaO46xuIG6zMd7hu7CXlEM3GoTWwqVcEYft', '198.145.79.218', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-18', '2026-05-18 00:18:07', '2026-05-18 00:18:07'),
+(76, '00BQ0wWgw7uO36soGMdVypN3tmoJni1HFaCjvYOo', '128.90.141.10', 'a2040d77cb5f7d5b5359708732e7d2e05ab9b1ea76b88da0d5d5cf7b41de4008', '2026-05-18', '2026-05-18 02:33:39', '2026-05-18 02:33:39'),
+(77, 'XyctfClai0rlHygiFZMuzueUyFii42c4UHRqOs4V', '13.220.57.157', '2b4b510a39e929e85d42a20616e2c5860191fe2856af86f1d040168e83d6e9a5', '2026-05-18', '2026-05-18 03:04:03', '2026-05-18 03:04:03'),
+(78, 'I82gPVqotRvgw11grtl5h5BvIX0IlACbMAnQWOd3', '13.220.57.157', '990e2919205ea8271f21c41a66f866ffb9560dcd0e3c2403b6417f251aa135c9', '2026-05-18', '2026-05-18 03:04:54', '2026-05-18 03:04:54'),
+(79, 's3Fte2ugKFW5W8QPISgjpbIZuAHSXH7eZ0j38VdX', '2401:4900:891c:eb32:8d97:5977:c7e4:f49f', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-18', '2026-05-18 04:59:49', '2026-05-18 04:59:49'),
+(80, 'ZbINOltBYuLvWZCMeNVi4Eh9AdBXfFxtUXRX53Hw', '192.71.2.57', '7b76485d6f874a8cc64eb6451e08f9b3503fbad3d0f7b664564296c1ff9e9202', '2026-05-18', '2026-05-18 07:57:04', '2026-05-18 07:57:04'),
+(81, 'cQ9fltM78frynoBogii9ftepnR4lI4lmZgkTwzJj', '2a02:4780:3:1::3', '1c5c75fda7279264269435437b955840025da8baa92b3d4b3e0cca9349723f71', '2026-05-18', '2026-05-18 08:00:48', '2026-05-18 08:00:48'),
+(82, 'QM87BYtkWfiRGPr5gvlTEvGH3pdcDtuvK7gf2i6U', '64.225.60.43', '61b88f0a9f3157393f99888d9f51835502e99b3ad2e00a9cfc40020f217e4214', '2026-05-18', '2026-05-18 08:07:27', '2026-05-18 08:07:27'),
+(83, '8C6NdfKYfxk6P7fUQBR4qyqUbMZ5rZzsdPUzJhrp', '147.182.150.128', '61b88f0a9f3157393f99888d9f51835502e99b3ad2e00a9cfc40020f217e4214', '2026-05-18', '2026-05-18 09:17:17', '2026-05-18 09:17:17'),
+(84, 'oNhFbnZywvPMsgBrOejIraURws6C4zWSQ0Sw64uu', '66.249.73.165', '043937ea8abaea325dbde1020b1bdd9f921dcbae7450dc9141c47a7d3473c917', '2026-05-18', '2026-05-18 11:08:55', '2026-05-18 11:08:55'),
+(85, 'qNg6YgFI36LuDGEjsOUN93ZeYEEB6lsrojVK4xuI', '66.249.73.165', '3a477e8837166157ca63150476f5a18ab665b2f1ec531a6a7f4b1ac59552e435', '2026-05-18', '2026-05-18 11:08:55', '2026-05-18 11:08:55'),
+(86, '2yHoPHI9WDPzjavEXivthDvuLTk0ARM7NbHi0X2C', '192.36.109.104', '5e56ab3ae59f0274a7b8274bed6d919e68ce3dda0aea36f321a81d579809cdc5', '2026-05-18', '2026-05-18 11:50:29', '2026-05-18 11:50:29'),
+(87, 'euac2UyhaP2jQsMFKx0fNLWFNHsp9rUf3RmjzmY0', '66.249.73.164', '043937ea8abaea325dbde1020b1bdd9f921dcbae7450dc9141c47a7d3473c917', '2026-05-18', '2026-05-18 12:06:49', '2026-05-18 12:06:49'),
+(88, 'b5i7g4MEQ9h9ivSv5KopoKeDnDkM2I5bcoGqfsfi', '66.249.73.164', '3a477e8837166157ca63150476f5a18ab665b2f1ec531a6a7f4b1ac59552e435', '2026-05-18', '2026-05-18 12:06:49', '2026-05-18 12:06:49'),
+(89, 'nwcUyr6v1r4L0Vfc6VzX69nESVaagJokibrINzMP', '223.185.48.108', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-18', '2026-05-18 12:39:49', '2026-05-18 12:39:49'),
+(90, 'ktd6vPXUyKoWGDr9EbgZBnEnXRARG6nDo8Mx5uIj', '198.145.79.218', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-18', '2026-05-18 13:39:36', '2026-05-18 13:39:36'),
+(91, 'ZqpJQcd7JvyeYud2z7caaLsI9xXjj2WDTT069YQ8', '44.212.244.90', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-18', '2026-05-18 14:59:10', '2026-05-18 14:59:10'),
+(92, 'tmJHiID3jsef2OdEeZkjBPQWXNUchfuQT7LnmzaG', '2401:4900:882c:da76:eddf:18a4:72f1:b329', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-18', '2026-05-18 15:50:31', '2026-05-18 15:50:31'),
+(93, 'QsjG3Vi8CZmBH0q8cqSZ355N3q5urVomN8t9Kyk3', '2401:4900:882c:da76:eddf:18a4:72f1:b329', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-18', '2026-05-18 17:15:46', '2026-05-18 17:36:15'),
+(94, '8gXGABoak9IdMOLmgMoGiDvQVdj4QyU7Z8wBS8Fl', '106.75.66.103', '95afd94d5fc3f2fc76c95565319aa608cdac7d247864e30e40047081ddee0f07', '2026-05-18', '2026-05-18 17:43:13', '2026-05-18 17:43:13'),
+(95, 'U3tCmNCvttRLCB6Pbb1hbyTF3eswbunstsKjY0AD', '23.27.145.4', 'eb661d7d1bfc2c294df00e6aee2ae1dec524e0f3d513298d3eefb8356e693646', '2026-05-18', '2026-05-18 18:02:27', '2026-05-18 18:02:27'),
+(96, '5bZyDQCG6MYKqPTDbvS8ZyTsWNnVbfyk3Zpup2MF', '198.244.240.246', 'afd918cf2db87d7f8a790c965a0cd0502bb558df606cdd6ee8316afee68b668b', '2026-05-18', '2026-05-18 20:35:53', '2026-05-18 20:35:53'),
+(97, 'ip02ouQ7dQO9gWjo6aryAFVL8ELzsIRnmYRXKHS7', '20.219.23.189', 'feee3e5acc6fe39468f71d56ed1093a8356102397569c6e83b20f0ce9db40d95', '2026-05-18', '2026-05-18 21:21:34', '2026-05-18 21:21:34'),
+(98, 'caE0uiCaSMeGXKuHFn6Lmjst4cKrrcudDYFI6wBB', '2401:4900:882e:7c3a:eddf:18a4:72f1:b329', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-18', '2026-05-18 23:50:27', '2026-05-18 23:50:27'),
+(99, 'caE0uiCaSMeGXKuHFn6Lmjst4cKrrcudDYFI6wBB', '2401:4900:882e:7c3a:eddf:18a4:72f1:b329', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-19', '2026-05-19 00:00:02', '2026-05-19 00:00:02'),
+(100, 'fCnrlbjofEW6vYwM7BuFoH7EfveeBPXwD9kOrNWl', '66.249.73.167', 'ef9459b27b0b285bff46aa8608d8fdc3b12ed21bf442aedc31a5787a0bd166bb', '2026-05-19', '2026-05-19 00:16:25', '2026-05-19 00:16:25'),
+(101, 'TpuNDQPrKeDhg8MIFiL1tQ5lz5WxVKDVZn29OyEr', '2401:4900:882e:7c3a:57c2:aa18:f79a:85b3', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-19', '2026-05-19 01:19:45', '2026-05-19 01:19:45'),
+(102, 'gR0RNn1MDL8s6f2KuLU1n9oi48f6dJbpF1i1iv9j', '2401:4900:84d9:5120::74f1:ee74', 'ef78bc17265d32e6c02d6cc23189e096909db7f5084bb8d0fe20ac7585d8c803', '2026-05-19', '2026-05-19 01:22:34', '2026-05-19 01:22:34'),
+(103, '9IJH5UCMbppIm0K5rEyRawPpq3u1ABx67AQH6K4a', '9.142.21.91', '0947dfa249bc5f884ef72d90b8bf40ce75885a289f59011695425fd6b8f45bfb', '2026-05-19', '2026-05-19 03:17:55', '2026-05-19 03:17:55'),
+(104, 'sGw4zCgFdTOLCISED2yG1jHvvlbPRdias0Lw9U8I', '2a02:4780:3:1::3', '1c5c75fda7279264269435437b955840025da8baa92b3d4b3e0cca9349723f71', '2026-05-19', '2026-05-19 04:30:40', '2026-05-19 04:30:40'),
+(105, 'qGT3dvd1ND56zHAP1PNQviKTuHdmR77zzQsccRil', '2401:4900:882e:7c3a:f9b6:6b6b:4e7e:8795', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-19', '2026-05-19 04:38:03', '2026-05-19 04:38:03'),
+(106, 'ZkhNGzgzUo0VEdh08jfr7C64hij16rWlPKE7CdG5', '46.138.250.165', 'b62f21064b6ab11465dbc54b761f62451d34a0aa281f7b2199c8c50bfa4d1327', '2026-05-19', '2026-05-19 05:03:00', '2026-05-19 05:03:00'),
+(107, 'bGubM4XYgYC7lD0GfSyMWaj2BsjTL6yymdBmpoLN', '46.138.250.165', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', '2026-05-19', '2026-05-19 05:03:02', '2026-05-19 05:03:02'),
+(108, 'IHQcn44QVUvAxWBaYKZKXcLv0kWPhswrdT7sWQWw', '2401:4900:88d4:b43f:5517:3a70:7d0d:166e', '9884896580bbd9285b8a0782ea7ae63de01ed5f471d1bab6202de0630c0399a3', '2026-05-19', '2026-05-19 05:18:49', '2026-05-19 05:18:49');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`),
+  ADD KEY `cache_locks_expiration_index` (`expiration`);
+
+--
+-- Indexes for table `creator_link_submissions`
+--
+ALTER TABLE `creator_link_submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `creator_link_submissions_submission_date_index` (`submission_date`),
+  ADD KEY `creator_link_submissions_platform_index` (`platform`),
+  ADD KEY `creator_link_submissions_access_token_index` (`access_token`),
+  ADD KEY `creator_link_submissions_session_id_index` (`session_id`);
+
+--
+-- Indexes for table `creator_link_unlocks`
+--
+ALTER TABLE `creator_link_unlocks`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `creator_link_unlocks_access_token_unique` (`access_token`),
+  ADD UNIQUE KEY `creator_link_unlocks_unlock_date_session_id_platform_unique` (`unlock_date`,`session_id`,`platform`),
+  ADD KEY `creator_link_unlocks_unlock_date_index` (`unlock_date`),
+  ADD KEY `creator_link_unlocks_session_id_index` (`session_id`);
+
+--
+-- Indexes for table `creator_link_winners`
+--
+ALTER TABLE `creator_link_winners`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `creator_link_winners_winner_date_platform_unique` (`winner_date`,`platform`),
+  ADD KEY `creator_link_winners_submission_id_foreign` (`submission_id`),
+  ADD KEY `creator_link_winners_winner_date_index` (`winner_date`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `job_batches`
+--
+ALTER TABLE `job_batches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `settings_key_unique` (`key`);
+
+--
+-- Indexes for table `visitor_logs`
+--
+ALTER TABLE `visitor_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `visitor_logs_session_id_visited_on_unique` (`session_id`,`visited_on`),
+  ADD KEY `visitor_logs_visited_on_index` (`visited_on`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `creator_link_submissions`
+--
+ALTER TABLE `creator_link_submissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `creator_link_unlocks`
+--
+ALTER TABLE `creator_link_unlocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `creator_link_winners`
+--
+ALTER TABLE `creator_link_winners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `visitor_logs`
+--
+ALTER TABLE `visitor_logs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `creator_link_winners`
+--
+ALTER TABLE `creator_link_winners`
+  ADD CONSTRAINT `creator_link_winners_submission_id_foreign` FOREIGN KEY (`submission_id`) REFERENCES `creator_link_submissions` (`id`) ON DELETE SET NULL;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

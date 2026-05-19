@@ -43,7 +43,7 @@
       <p class="font-semibold">Total Visitors: <span class="text-green-600">{{ number_format($totalVisitors ?? 0) }}</span></p>
       <p class="font-semibold">Total Submissions: <span class="text-orange-600">{{ number_format($totalSubmissions ?? 0) }}</span></p>
       <p class="font-semibold">Featured Creators: <span class="text-violet-600">{{ number_format($featuredCreatorCount - 3 ?? 0) }}</span></p>
-      <p class="font-semibold">Running Date: <span class="text-yellow-600">{{ $runningDate ?? '06-05-2026' }}</span></p>
+      <p class="font-semibold">Running Date: <span class="text-yellow-600">{{ $runningDate ?? '05-05-2026' }}</span></p>
       <p class="font-semibold">Serving Since: <span class="text-gray-600">{{ $servingSince ?? '04-05-2026' }}</span></p>
     </div>
   </section>
@@ -98,6 +98,15 @@
             Submit
           </button>
         </div>
+        
+        <p class="text-center text-xs text-gray-500 mt-6">
+          To Discover More YouTube Creators -
+          <a href="https://shortroads.com" target="_blank" rel="noopener noreferrer"
+             class="text-red-500 font-medium no-underline hover:text-red-600">
+             shortroADS.com
+          </a>
+        </p>
+        
       </div>
 
       <div class="bg-white border border-pink-500 rounded-2xl shadow-lg p-6 flex-1 max-w-sm mx-auto flex flex-col justify-between">
@@ -137,6 +146,15 @@
             Submit
           </button>
         </div>
+        
+        <p class="text-center text-xs text-gray-500 mt-6">
+          To Discover Creators from 20+ Social Networks -
+          <a href="https://secminhr.com" target="_blank" rel="noopener noreferrer"
+             class="text-pink-500 font-medium no-underline hover:text-pink-600">
+             secminhr.com
+          </a>
+        </p>
+        
       </div>
 
       <div class="bg-white border border-[#FE2C55] rounded-2xl shadow-lg p-6 flex-1 max-w-sm mx-auto flex flex-col justify-between">
@@ -176,6 +194,15 @@
             Submit
           </button>
         </div>
+        
+        <p class="text-center text-xs text-gray-500 mt-6">
+          To Discover Creators from 20+ Social Networks -
+          <a href="https://secminhr.com" target="_blank" rel="noopener noreferrer"
+             class="text-[#FE2C55] font-medium no-underline hover:text-pink-600">
+             secminhr.com
+          </a>
+        </p>
+        
       </div>
     </div>
   </section>
@@ -202,7 +229,7 @@
         </p>
     
         <p class="font-semibold">
-          * 150+ Free AI Tools *
+          * 150+ AI Tools *
         </p>
     
         <p>
@@ -213,7 +240,7 @@
         <div class="pt-4">
           <a href="https://tacepook.com/" target="_blank"
             class="inline-block px-6 py-3 rounded-lg bg-gradient-to-r from-[#134e5e] to-[#71b280] text-white font-semibold shadow-md hover:opacity-90 transition">
-            Visit tacepook.com
+            Visit - tacepook.com
           </a>
         </div>
     
