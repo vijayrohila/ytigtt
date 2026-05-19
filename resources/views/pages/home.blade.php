@@ -42,7 +42,7 @@
       <p class="font-semibold">Yesterday's Visitors: <span class="text-pink-600">{{ number_format($yesterdayVisitors ?? 0) }}</span></p>
       <p class="font-semibold">Total Visitors: <span class="text-green-600">{{ number_format($totalVisitors ?? 0) }}</span></p>
       <p class="font-semibold">Total Submissions: <span class="text-orange-600">{{ number_format($totalSubmissions ?? 0) }}</span></p>
-      <p class="font-semibold">Featured Creators: <span class="text-violet-600">{{ number_format($featuredCreatorCount ?? 0) }}</span></p>
+      <p class="font-semibold">Featured Creators: <span class="text-violet-600">{{ number_format($featuredCreatorCount - 3 ?? 0) }}</span></p>
       <p class="font-semibold">Running Date: <span class="text-yellow-600">{{ $runningDate ?? '06-05-2026' }}</span></p>
       <p class="font-semibold">Serving Since: <span class="text-gray-600">{{ $servingSince ?? '04-05-2026' }}</span></p>
     </div>
