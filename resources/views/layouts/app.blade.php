@@ -118,7 +118,8 @@
     <a href="{{ route('advertising-policy') }}">Advertising Policy</a>
     <a href="{{ route('acceptable-use-policy') }}">Acceptable Use Policy</a>
     <a href="{{ route('community-guidelines') }}">Community Guidelines</a>
-  </nav>
+    <a href="{{ route('founder') }}">FoUNDER</a>
+  </nav> 
 
   @yield('content')
 
