@@ -16,4 +16,4 @@ Route::view('/privacy', 'pages.privacy')->name('privacy');
 Route::view('/advertising-policy', 'pages.advertising-policy')->name('advertising-policy');
 Route::view('/acceptable-use-policy', 'pages.acceptable-use-policy')->name('acceptable-use-policy');
 Route::view('/community-guidelines', 'pages.community-guidelines')->name('community-guidelines');
-// Route::view('/founder', 'pages.founder')->name('founder');
+Route::view('/founder', 'pages.founder')->name('founder');
