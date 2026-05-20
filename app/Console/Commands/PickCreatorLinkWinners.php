@@ -41,7 +41,7 @@ class PickCreatorLinkWinners extends Command
         }
 
         CreatorLinkWinner::query()
-            ->where('winner_date', $processDate)
+            //->where('winner_date', $processDate)
             ->delete();
 
         $this->line("Deleted existing winners for {$processDate} before saving new winners.");
