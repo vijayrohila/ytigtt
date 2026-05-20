@@ -28,9 +28,14 @@
   <section>
     <div class="bg-gray-100 border border-[#71b280] rounded-lg py-8 text-center">
       <p class="text-lg font-semibold mb-4 text-[#134e5e]">Advertisement - 1</p>
-      <a href="https://ytigtt.com" target="_blank"
+      
+      <p class="text-gray-700 max-w-2xl mx-auto mb-5 px-4">
+         Find <strong>Indian Influencers</strong> and hire them to promote your products or services across social media platforms. Connect with creators from different niches and grow your brand reach effectively. <span class="text-sm">(T&amp;C Apply)</span>
+      </p>
+      
+      <a href="https://100k.in" target="_blank"
         class="inline-block bg-gradient-to-br from-[#134e5e] to-[#71b280] text-white px-8 py-2 rounded-full">
-        www.ytigtt.com
+        www.100k.in
       </a>
     </div>
   </section>
@@ -51,9 +56,14 @@
   <section>
     <div class="bg-gray-100 border border-[#71b280] rounded-lg py-8 text-center">
       <p class="text-lg font-semibold mb-4 text-[#134e5e]">Advertisement - 2</p>
-      <a href="https://ytigtt.com" target="_blank"
+      
+      <p class="text-gray-700 max-w-3xl mx-auto mb-5 px-4">
+         <strong>HI vs AI</strong> is a learning platform for discovering valuable courses on life, money, health, wellness, AI, and future-ready technology skills. <span class="text-sm">(T&amp;C Apply)</span>
+      </p>
+      
+      <a href="https://hivsai.com" target="_blank"
         class="inline-block bg-gradient-to-br from-[#134e5e] to-[#71b280] text-white px-8 py-2 rounded-full">
-        www.ytigtt.com
+        www.HIvsAI.com
       </a>
     </div>
   </section>
@@ -210,9 +220,14 @@
   <section>
     <div class="bg-gray-100 border border-[#71b280] rounded-lg py-8 text-center">
       <p class="text-lg font-semibold mb-4 text-[#134e5e]">Advertisement - 3</p>
-      <a href="https://ytigtt.com" target="_blank"
+      
+      <p class="text-gray-700 max-w-3xl mx-auto mb-5 px-4">
+         <strong>Any X Any</strong> is a global business network built to create real-world connections, partnerships, and opportunities across industries. <span class="text-sm">(T&amp;C Apply)</span>
+      </p>
+      
+      <a href="https://anyxany.com" target="_blank"
         class="inline-block bg-gradient-to-br from-[#134e5e] to-[#71b280] text-white px-8 py-2 rounded-full">
-        www.ytigtt.com
+        www.anyxany.com
       </a>
     </div>
   </section>
@@ -334,7 +349,7 @@
     const linkType = id === 'yt' ? 'video link' : 'link';
 
     await showMessage(
-      'Too fast',
+      'Too Fast',
       'Hey Participant, that was too fast. Click again and Watch ' + seconds + ' seconds, to unlock the Submission for your ' + platformName + ' ' + linkType + ' — Thanks!',
       'info'
     );

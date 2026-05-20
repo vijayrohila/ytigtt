@@ -123,7 +123,7 @@
 
   @yield('content')
 
-  <footer class="text-white py-4 text-sm text-center">
+  <footer class="text-white py-4 text-sm font-bold text-center">
     &copy; - <a href="https://www.ytigtt.com">YT IG TT</a>
   </footer>
 
